@@ -7,13 +7,71 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
+    <RadioGroup
+        android:id="@+id/rgLutemonType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.218"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.103">
+
+        <RadioButton
+            android:id="@+id/radioButtonWhite"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Valkoinen" />
+
+        <RadioButton
+            android:id="@+id/radioButtonGreen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Vihreä" />
+
+        <RadioButton
+            android:id="@+id/radioButtonPink"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Pinkki" />
+
+        <RadioButton
+            android:id="@+id/radioButtonOrange"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Oranssi" />
+
+        <RadioButton
+            android:id="@+id/radioButtonBlack"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Musta" />
+    </RadioGroup>
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Lutemonin nimi"
+        android:inputType="text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/addButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="addLutemon"
+        android:text="Lisää uusi Lutemon"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.594" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
