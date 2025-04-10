@@ -5,6 +5,11 @@ import java.util.ArrayList;
 
 public class Lutemon implements Serializable {
 
+    public Lutemon(String name, String color) {
+        this.name = name;
+        this.color = color;
+    }
+
     public String getName() {
         return name;
     }
@@ -23,6 +28,10 @@ public class Lutemon implements Serializable {
 
     public int getAttack() {
         return attack;
+    }
+
+    public void printSpecs() {
+        System.out.println(name + " : " + color + ", " + health);
     }
 
     public void setAttack(int attack) {

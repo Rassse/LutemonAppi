@@ -23,14 +23,18 @@ public class MainActivity extends AppCompatActivity {
         switch (rgLutemonType.getCheckedRadioButtonId()) {
             case R.id.radioButtonWhite:
                 Storage.getInstance().addLutemon(new Lutemon(name.getText().toString(), "Valkoinen"));
+                break;
             case R.id.radioButtonGreen:
                 Storage.getInstance().addLutemon(new Lutemon(name.getText().toString(), "Vihreä"));
+                break;
             case R.id.radioButtonPink:
                 Storage.getInstance().addLutemon(new Lutemon(name.getText().toString(), "Pinkki"));
             case R.id.radioButtonOrange:
                 Storage.getInstance().addLutemon(new Lutemon(name.getText().toString(), "Oranssi"));
+                break;
             case R.id.radioButtonBlack:
                 Storage.getInstance().addLutemon(new Lutemon(name.getText().toString(), "Musta"));
+                break;
         }
     }
 }

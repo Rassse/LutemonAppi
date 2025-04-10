@@ -33,17 +33,17 @@ public class Storage {
     }
 
     public Lutemon getLutemonById(int id) {
-        return lutemons.remove(id);
+        return lutemons.get(id);
     }
 
     public Lutemon getLutemonByIdWithoutRemove(int id) {
         return lutemons.get(id);
     }
 
-    public void removeLutemon(String id) {
+    public void removeLutemon(int id) {
         int i = 0;
         for (Lutemon l : lutemons) {
-            if (l.getId().equals(id)) {
+            if (l.getId() == id) {
                 break;
             }
             i++;
@@ -66,7 +66,7 @@ public class Storage {
 
     public void saveLutemons(Context context) {
         try {
-            ObjectOutputStrean lutemonWriter = new ObjectOutputStream(context.openFileOutput("lutemons.data", Context.MODE_PRIVATE));
+            ObjectOutputStream lutemonWriter = new ObjectOutputStream(context.openFileOutput("lutemons.data", Context.MODE_PRIVATE));
             lutemonWriter.writeObject(lutemons);
             lutemonWriter.close();
         } catch (IOException e) {
