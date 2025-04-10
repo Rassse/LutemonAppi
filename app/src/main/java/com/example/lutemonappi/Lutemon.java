@@ -1,13 +1,17 @@
 package com.example.lutemonappi;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+
 
 public class Lutemon implements Serializable {
 
     public Lutemon(String name, String color) {
         this.name = name;
         this.color = color;
+        this.attack = 1;
+        this.defense = 1;
+
+        this.experience = 0;
     }
 
     public String getName() {
@@ -86,4 +90,5 @@ public class Lutemon implements Serializable {
     protected int health;
     protected int maxHealth;
     protected int id;
+    protected int idCounter;
 }

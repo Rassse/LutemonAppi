@@ -17,6 +17,14 @@ public class Storage {
 
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public static Storage getStorage() {
+        return storage;
+    }
+
     public static Storage getInstance() {
         if(storage == null) {
             storage = new Storage();

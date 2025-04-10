@@ -24,6 +24,7 @@
         android:id="@+id/listLutemons"
         android:layout_width="220dp"
         android:layout_height="wrap_content"
+        android:onClick="switchToListLutemons"
         android:text="Listaa Lutemonit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
