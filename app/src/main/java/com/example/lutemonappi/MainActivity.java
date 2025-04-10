@@ -1,5 +1,6 @@
 package com.example.lutemonappi;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -23,19 +24,28 @@ public class MainActivity extends AppCompatActivity {
         int checkId = rgLutemonType.getCheckedRadioButtonId();
         if (checkId == R.id.radioButtonWhite) {
             Storage.getInstance().addLutemon(new Lutemon(name.getText().toString(), "Valkoinen"));
+            switchToActivityNavigator(view);
         }
         else if (checkId == R.id.radioButtonGreen) {
-                Storage.getInstance().addLutemon(new Lutemon(name.getText().toString(), "Vihreä"));
+            Storage.getInstance().addLutemon(new Lutemon(name.getText().toString(), "Vihreä"));
+            switchToActivityNavigator(view);
         }
         else if (checkId == R.id.radioButtonPink) {
             Storage.getInstance().addLutemon(new Lutemon(name.getText().toString(), "Pinkki"));
+            switchToActivityNavigator(view);
         }
         else if (checkId == R.id.radioButtonOrange) {
             Storage.getInstance().addLutemon(new Lutemon(name.getText().toString(), "Oranssi"));
+            switchToActivityNavigator(view);
         }
         else if (checkId == R.id.radioButtonBlack) {
             Storage.getInstance().addLutemon(new Lutemon(name.getText().toString(), "Musta"));
+            switchToActivityNavigator(view);
         }
 
+    }
+    public void switchToActivityNavigator(View view) {
+        Intent intent = new Intent(this, ActivityNavigator.class);
+        startActivity(intent);
     }
 }
