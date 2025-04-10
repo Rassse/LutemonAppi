@@ -15,7 +15,6 @@ public class LutemonListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lutemon_list);
-
         storage = Storage.getInstance();
         recyclerView = findViewById(R.id.rvLutemonList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
