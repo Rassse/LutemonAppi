@@ -11,6 +11,7 @@
         android:id="@+id/addNewLutemon"
         android:layout_width="220dp"
         android:layout_height="wrap_content"
+        android:onClick="switchToMainActivity"
         android:text="Lisää uusi Lutemon"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
