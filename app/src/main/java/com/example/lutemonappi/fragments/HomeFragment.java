@@ -3,12 +3,20 @@ package com.example.lutemonappi.fragments;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.example.lutemonappi.Lutemon;
+import com.example.lutemonappi.LutemonListAdapter;
 import com.example.lutemonappi.R;
+import com.example.lutemonappi.Storage;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -16,6 +24,9 @@ import com.example.lutemonappi.R;
  * create an instance of this fragment.
  */
 public class HomeFragment extends Fragment {
+
+    private Storage storage;
+    private RecyclerView recyclerView;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -61,6 +72,17 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        recyclerView = view.findViewById(R.id.rvLutemonsHome);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        storage = Storage.getInstance();
+        ArrayList<Lutemon> lutemons = storage.getLutemons();
+        // Deepseek taught me in debugging setting up LutemonListAdapter //
+        if (getArguments() != null) {
+            LutemonListAdapter lutemonListAdapter = new LutemonListAdapter(getContext(), lutemons);
+            recyclerView.setAdapter(lutemonListAdapter);
+        }
+        return view;
     }
 }

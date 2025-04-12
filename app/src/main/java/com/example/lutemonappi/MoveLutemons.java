@@ -12,6 +12,9 @@ import com.example.lutemonappi.fragments.FightFragment;
 import com.example.lutemonappi.fragments.HomeFragment;
 import com.example.lutemonappi.fragments.TrainingFragment;
 
+import java.sql.Array;
+import java.util.ArrayList;
+
 
 public class MoveLutemons extends AppCompatActivity {
 
@@ -37,9 +40,17 @@ public class MoveLutemons extends AppCompatActivity {
             int checkId = view.getId();
             if (checkId == R.id.buttonHome) {
                 fragment = new HomeFragment();
+                Bundle data = new Bundle();
+                ArrayList<Lutemon> lutemons = Storage.getInstance().getLutemons();
+                data.putSerializable("Lutemonit Kotona", lutemons);
+                fragment.setArguments(data);
             }
             else if (checkId == R.id.buttonTraining) {
                 fragment = new TrainingFragment();
+                Bundle data = new Bundle();
+                ArrayList<Lutemon> lutemons = new ArrayList<>();
+                data.putString("dataId", "Treenataan Lutemoneja!");
+                fragment.setArguments(data);
             }
             else if (checkId == R.id.buttonFight) {
                 fragment = new FightFragment();

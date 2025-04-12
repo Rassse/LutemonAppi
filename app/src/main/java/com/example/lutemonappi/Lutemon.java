@@ -43,8 +43,6 @@ public class Lutemon implements Serializable {
 
     }
 
-
-
     public String getName() {
         return name;
     }
