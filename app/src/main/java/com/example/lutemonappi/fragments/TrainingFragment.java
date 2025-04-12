@@ -7,7 +7,6 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.example.lutemonappi.R;
 
@@ -62,16 +61,6 @@ public class TrainingFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
-        View view = inflater.inflate(R.layout.fragment_training, container, false);
-        TextView txtTraining = view.findViewById(R.id.txtTraining);
-        if (getArguments() != null) {
-            String trainingTxt = getArguments().getString("dataId");
-            txtTraining.setText(trainingTxt);
-        }
-
-        return view;
-
-
+        return inflater.inflate(R.layout.fragment_training, container, false);
     }
 }
