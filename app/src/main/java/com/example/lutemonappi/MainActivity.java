@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
         EditText name = findViewById(R.id.editText);
         RadioGroup rgLutemonType = findViewById(R.id.rgLutemonType);
         int checkId = rgLutemonType.getCheckedRadioButtonId();
+        /* DeepSeek helped me to debug this part with the help of lecture material, I had to make a checkId variable and check the conditions based on that */
         if (checkId == R.id.radioButtonWhite) {
             Storage.getInstance().addLutemon(new Lutemon(name.getText().toString(), "Valkoinen"));
             switchToActivityNavigator(view);

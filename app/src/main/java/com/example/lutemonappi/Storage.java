@@ -37,7 +37,9 @@ public class Storage {
     }
 
     public void addLutemon(Lutemon lutemon) {
-        lutemons.add(lutemon);
+        if (lutemons.add(lutemon))  {
+            System.out.println("Onnistui");
+        }
     }
 
     public Lutemon getLutemonById(int id) {
