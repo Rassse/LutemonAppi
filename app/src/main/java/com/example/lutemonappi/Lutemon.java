@@ -8,11 +8,42 @@ public class Lutemon implements Serializable {
     public Lutemon(String name, String color) {
         this.name = name;
         this.color = color;
-        this.attack = 1;
-        this.defense = 1;
-
+        this.attack = 0;
+        this.defense = 0;
+        this.id = idCounter;
         this.experience = 0;
+        this.maxHealth = 0;
+
+        // DeepSeek helped me to ideate method to get the default values for colors //
+        if (color == "Valkoinen") {
+            this.attack = 5;
+            this.defense = 4;
+            this.maxHealth = 20;
+        }
+        else if (color == "Vihreä") {
+            this.attack = 6;
+            this.defense = 3;
+            this.maxHealth = 19;
+        }
+        else if (color == "Pinkki") {
+            this.attack = 7;
+            this.defense = 2;
+            this.maxHealth = 18;
+        }
+        else if (color == "Oranssi") {
+            this.attack = 8;
+            this.defense = 1;
+            this.maxHealth = 17;
+        }
+        else if (color == "Musta") {
+            this.attack = 9;
+            this.defense = 0;
+            this.maxHealth = 16;
+        }
+
     }
+
+
 
     public String getName() {
         return name;

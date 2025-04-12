@@ -32,25 +32,29 @@
             android:id="@+id/textViewAttack"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Hyökkäys" />
+            android:text="Hyökkäys"
+            android:textSize="17sp" />
 
         <TextView
             android:id="@+id/textViewDefence"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Puolustus" />
+            android:text="Puolustus"
+            android:textSize="17sp" />
 
         <TextView
             android:id="@+id/textViewHealth"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Elämät" />
+            android:text="Elämät"
+            android:textSize="17sp" />
 
         <TextView
             android:id="@+id/textViewExperience"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Kokemus" />
+            android:text="Kokemus"
+            android:textSize="17sp" />
     </LinearLayout>
 
 </androidx.appcompat.widget.LinearLayoutCompat>
