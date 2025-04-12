@@ -25,4 +25,9 @@ public class ActivityNavigator extends AppCompatActivity {
         Intent intent = new Intent(this, LutemonListActivity.class);
         startActivity(intent);
     }
+
+    public void switchToMoveLutemons(View view) {
+        Intent intent = new Intent(this, MoveLutemons.class);
+        startActivity(intent);
+    }
 }
