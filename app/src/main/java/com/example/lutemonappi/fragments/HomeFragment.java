@@ -77,10 +77,10 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-        recyclerView = view.findViewById(R.id.rvLutemonsHome);
+        /*recyclerView = view.findViewById(R.id.rvLutemonsHome);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         lutemonListAdapter = new LutemonListAdapter(getContext(), lutemons);
-        recyclerView.setAdapter(lutemonListAdapter);
+        recyclerView.setAdapter(lutemonListAdapter);*/
         storage = Storage.getInstance();
         checkBoxWhite = view.findViewById(R.id.checkBoxWhite);
         checkBoxGreen = view.findViewById(R.id.checkBoxGreen);

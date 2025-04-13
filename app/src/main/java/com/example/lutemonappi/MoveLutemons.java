@@ -20,6 +20,9 @@ public class MoveLutemons extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_move_lutemons);
+        // Copilot helped me to figure out to put the Intent here in order for the tabs to be constantly on, not get inititialized by pressing the one of the tabs //
+        Intent intent = new Intent(this, TabActivity.class);
+        startActivity(intent);
 
         Button homeFragment = findViewById(R.id.buttonHome);
         Button trainingFragment = findViewById(R.id.buttonTraining);
@@ -30,12 +33,13 @@ public class MoveLutemons extends AppCompatActivity {
         trainingFragment.setOnClickListener(listener);
         fightFragment.setOnClickListener(listener);
         deadFragment.setOnClickListener(listener);
+
     }
     private View.OnClickListener listener = new View.OnClickListener() {
+
         @Override
         public void onClick(View view) {
-            Intent intent = new Intent(view.getContext(), TabActivity.class);
-            startActivity(intent);
+            // Copilot helped me figure out I had to remove the intent to not go directlty to the first activity //
             Fragment fragment = null;
             int checkId = view.getId();
             if (checkId == R.id.buttonHome) {
@@ -50,9 +54,9 @@ public class MoveLutemons extends AppCompatActivity {
             else if (checkId == R.id.buttonDead) {
                 fragment = new DeadFragment();
             }
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.frame, fragment)
-                    .commit();
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.frame, fragment)
+                        .commit();
         }
         
     };
