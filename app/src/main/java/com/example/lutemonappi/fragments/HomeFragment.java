@@ -9,7 +9,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.CheckBox;
+
 
 import com.example.lutemonappi.Lutemon;
 import com.example.lutemonappi.LutemonListAdapter;
@@ -26,7 +27,10 @@ import java.util.ArrayList;
 public class HomeFragment extends Fragment {
 
     private Storage storage;
+    private CheckBox checkBoxWhite, checkBoxGreen, checkBoxPink, checkBoxOrange, checkBoxBlack;
+    private ArrayList<Lutemon> lutemons = new ArrayList<>();
     private RecyclerView recyclerView;
+    private LutemonListAdapter lutemonListAdapter;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -73,16 +77,17 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-        // recyclerView = view.findViewById(R.id.rvLutemonsHome);
+        recyclerView = view.findViewById(R.id.rvLutemonsHome);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
+        lutemonListAdapter = new LutemonListAdapter(getContext(), lutemons);
+        recyclerView.setAdapter(lutemonListAdapter);
         storage = Storage.getInstance();
-        ArrayList<Lutemon> lutemons = storage.getLutemons();
-        // Deepseek taught me in debugging setting up LutemonListAdapter //
-        if (getArguments() != null) {
-            LutemonListAdapter lutemonListAdapter = new LutemonListAdapter(getContext(), lutemons);
-            recyclerView.setAdapter(lutemonListAdapter);
-        }
+        checkBoxWhite = view.findViewById(R.id.checkBoxWhite);
+        checkBoxGreen = view.findViewById(R.id.checkBoxGreen);
+        checkBoxPink = view.findViewById(R.id.checkBoxPink);
+        checkBoxOrange = view.findViewById(R.id.checkBoxOrange);
+        checkBoxBlack = view.findViewById(R.id.checkBoxBlack);
+
         return view;
     }
 }

@@ -1,5 +1,6 @@
 package com.example.lutemonappi;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -33,6 +34,8 @@ public class MoveLutemons extends AppCompatActivity {
     private View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
+            Intent intent = new Intent(view.getContext(), TabActivity.class);
+            startActivity(intent);
             Fragment fragment = null;
             int checkId = view.getId();
             if (checkId == R.id.buttonHome) {
