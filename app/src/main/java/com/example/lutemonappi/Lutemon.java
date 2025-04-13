@@ -50,6 +50,14 @@ public class Lutemon implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
+    public boolean aliveOrDead() {
+        if (health == 0) {
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
 
     public String getColor() {
         return color;
