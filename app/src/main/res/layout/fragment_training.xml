@@ -76,7 +76,7 @@
         android:id="@+id/moveButtonsTrain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="68dp"
+        android:layout_marginBottom="48dp"
         android:text="Siirrä valitut Lutemonit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -84,6 +84,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <RadioGroup
+        android:id="@+id/rgTraining"
         android:layout_width="116dp"
         android:layout_height="138dp"
         android:layout_marginTop="60dp"
@@ -105,8 +106,9 @@
 
         <RadioButton
             android:id="@+id/radioButtonFightTrain"
-            android:layout_width="164dp"
-            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:minHeight="48dp"
             android:text="Taistelemaan" />
     </RadioGroup>
 

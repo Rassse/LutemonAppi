@@ -6,10 +6,12 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.RadioGroup;
 
 
 import com.example.lutemonappi.Lutemon;
@@ -29,8 +31,7 @@ public class HomeFragment extends Fragment {
     private Storage storage;
     private CheckBox checkBoxWhite, checkBoxGreen, checkBoxPink, checkBoxOrange, checkBoxBlack;
     private ArrayList<Lutemon> lutemons = new ArrayList<>();
-    private RecyclerView recyclerView;
-    private LutemonListAdapter lutemonListAdapter;
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -77,16 +78,61 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-        /*recyclerView = view.findViewById(R.id.rvLutemonsHome);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        lutemonListAdapter = new LutemonListAdapter(getContext(), lutemons);
-        recyclerView.setAdapter(lutemonListAdapter);*/
         storage = Storage.getInstance();
+        ArrayList<Lutemon> lutemons = storage.getLutemons();
         checkBoxWhite = view.findViewById(R.id.checkBoxWhite);
         checkBoxGreen = view.findViewById(R.id.checkBoxGreen);
         checkBoxPink = view.findViewById(R.id.checkBoxPink);
         checkBoxOrange = view.findViewById(R.id.checkBoxOrange);
         checkBoxBlack = view.findViewById(R.id.checkBoxBlack);
+        RadioGroup rgLutemonWhereabouts = view.findViewById(R.id.rgLutemonHome);
+        int checkId = rgLutemonWhereabouts.getCheckedRadioButtonId();
+        int id = 0;
+        if (checkId == R.id.radioButtonHomeHome) {
+            id = 1;
+        }
+        else if (checkId == R.id.radioButtonTrainHome) {
+            id = 2;
+        }
+        else if (checkId == R.id.radioButtonFightHome) {
+            id = 3;
+        }
+
+        // Copilot helped me figure out that I can check lutemons.size() to retrieve the lutemons color right to the checkBoxes //
+        if (lutemons.size() > 0) {
+            checkBoxWhite.setText(lutemons.get(0).getName() + " (" + lutemons.get(0).getColor() + ")");
+            lutemons.get(0).setId(id);
+        } else  {
+            checkBoxWhite.setVisibility(View.GONE);
+        }
+        if (lutemons.size() > 1) {
+            checkBoxGreen.setText(lutemons.get(1).getName() + " (" + lutemons.get(1).getColor() + ")");
+            lutemons.get(1).setId(id);
+        } else  {
+            checkBoxGreen.setVisibility(View.GONE);
+        }
+        if (lutemons.size() > 2) {
+            checkBoxPink.setText(lutemons.get(2).getName()+" ("+lutemons.get(2).getColor()+")");
+            lutemons.get(2).setId(id);
+        } else {
+            checkBoxPink.setVisibility(View.GONE);
+        }
+        if (lutemons.size() > 3) {
+            checkBoxOrange.setText(lutemons.get(3).getName()+" ("+lutemons.get(3).getColor()+")");
+            lutemons.get(3).setId(id);
+        }
+        else {
+            checkBoxOrange.setVisibility(View.GONE);
+        }
+        if (lutemons.size() > 4) {
+            checkBoxBlack.setText(lutemons.get(4).getName()+" ("+lutemons.get(4).getColor()+")");
+            lutemons.get(4).setId(id);
+        }
+        else {
+            checkBoxBlack.setVisibility(View.GONE);
+        }
+
+        System.out.println(lutemons.get(1).getId());
 
         return view;
     }

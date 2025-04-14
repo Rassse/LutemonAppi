@@ -72,6 +72,7 @@
         app:layout_constraintVertical_bias="0.591" />
 
     <RadioGroup
+        android:id="@+id/rgLutemonHome"
         android:layout_width="149dp"
         android:layout_height="140dp"
         android:layout_marginStart="154dp"
@@ -86,26 +87,26 @@
             android:id="@+id/radioButtonHomeHome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="RadioButton" />
+            android:text="Kotiin" />
 
         <RadioButton
             android:id="@+id/radioButtonTrainHome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="RadioButton" />
+            android:text="Treenaamaan" />
 
         <RadioButton
             android:id="@+id/radioButtonFightHome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="RadioButton" />
+            android:text="Taistelemaan" />
     </RadioGroup>
 
     <Button
         android:id="@+id/moveButtonsHome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="52dp"
+        android:layout_marginBottom="28dp"
         android:text="Siirrä valitut Lutemonit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
