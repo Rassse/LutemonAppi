@@ -7,8 +7,14 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.RadioGroup;
 
+import com.example.lutemonappi.Lutemon;
 import com.example.lutemonappi.R;
+import com.example.lutemonappi.Storage;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -16,6 +22,10 @@ import com.example.lutemonappi.R;
  * create an instance of this fragment.
  */
 public class FightFragment extends Fragment {
+
+    private Storage storage;
+    private CheckBox checkBoxWhite3, checkBoxGreen3, checkBoxPink3, checkBoxOrange3, checkBoxBlack3;
+    private ArrayList<Lutemon> lutemons = new ArrayList<>();
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -61,6 +71,24 @@ public class FightFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_fight, container, false);
+        View view = inflater.inflate(R.layout.fragment_fight, container, false);
+
+        storage = Storage.getInstance();
+        ArrayList<Lutemon> lutemons = storage.getLutemons();
+        checkBoxWhite3 = view.findViewById(R.id.checkBoxWhite3);
+        checkBoxGreen3 = view.findViewById(R.id.checkBoxGreen3);
+        checkBoxPink3= view.findViewById(R.id.checkBoxPink3);
+        checkBoxOrange3 = view.findViewById(R.id.checkBoxOrange3);
+        checkBoxBlack3 = view.findViewById(R.id.checkBoxBlack3);
+
+        checkBoxWhite3.setText(lutemons.get(0).getName());
+        checkBoxGreen3.setText(lutemons.get(1).getName());
+        checkBoxPink3.setText(lutemons.get(2).getName());
+        checkBoxOrange3.setText(lutemons.get(3).getName());
+        checkBoxBlack3.setText(lutemons.get(4).getName());
+
+
+
+        return view;
     }
 }

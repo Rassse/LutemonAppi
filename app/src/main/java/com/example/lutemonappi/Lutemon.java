@@ -10,7 +10,7 @@ public class Lutemon implements Serializable {
         this.color = color;
         this.attack = 0;
         this.defense = 0;
-        this.id = idCounter;
+        this.id = 1;
         this.experience = 0;
         this.maxHealth = 0;
 

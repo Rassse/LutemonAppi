@@ -1,5 +1,6 @@
 package com.example.lutemonappi.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -13,6 +14,7 @@ import android.widget.RadioGroup;
 import com.example.lutemonappi.Lutemon;
 import com.example.lutemonappi.R;
 import com.example.lutemonappi.Storage;
+import com.example.lutemonappi.TrainLutemons;
 
 import java.util.ArrayList;
 
@@ -71,63 +73,61 @@ public class TrainingFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_training, container, false);
 
         storage = Storage.getInstance();
         ArrayList<Lutemon> lutemons = storage.getLutemons();
-        checkBoxWhite2 = view.findViewById(R.id.checkBoxWhite);
-        checkBoxGreen2 = view.findViewById(R.id.checkBoxGreen);
-        checkBoxPink2= view.findViewById(R.id.checkBoxPink);
-        checkBoxOrange2 = view.findViewById(R.id.checkBoxOrange);
-        checkBoxBlack2 = view.findViewById(R.id.checkBoxBlack);
+        checkBoxWhite2 = view.findViewById(R.id.checkBoxWhite2);
+        checkBoxGreen2 = view.findViewById(R.id.checkBoxGreen2);
+        checkBoxPink2= view.findViewById(R.id.checkBoxPink2);
+        checkBoxOrange2 = view.findViewById(R.id.checkBoxOrange2);
+        checkBoxBlack2 = view.findViewById(R.id.checkBoxBlack2);
 
         RadioGroup rgLutemonWhereAbouts = view.findViewById(R.id.rgTraining);
         int checkId = rgLutemonWhereAbouts.getCheckedRadioButtonId();
-        // Copilot helped me figure out that I can check lutemons.size() to retrieve the lutemons color right to the checkBoxes //
-        int id = 0;
-        if (checkId == R.id.radioButtonHomeTrain) {
-            id = 1;
-        }
-        else if (checkId == R.id.radioButtonTrainTrain) {
-            id = 2;
-        }
-        else if (checkId == R.id.radioButtonFightTrain) {
-            id = 3;
+        // Copilot helped me to check Id through iteration rather than long if else clauses //
+        ArrayList<Lutemon> lutemonsInTraining = new ArrayList<>();
+        for (Lutemon lutemon : lutemons) {
+            if (lutemon.getId() == 2) {
+                lutemonsInTraining.add(lutemon);
+            }
         }
 
         // Copilot helped me figure out that I can check lutemons.size() to retrieve the lutemons color right to the checkBoxes //
         if (lutemons.size() > 0) {
             checkBoxWhite2.setText(lutemons.get(0).getName() + " (" + lutemons.get(0).getColor() + ")");
-            lutemons.get(0).setId(id);
         } else  {
             checkBoxWhite2.setVisibility(View.GONE);
         }
         if (lutemons.size() > 1) {
             checkBoxGreen2.setText(lutemons.get(1).getName() + " (" + lutemons.get(1).getColor() + ")");
-            lutemons.get(1).setId(id);
         } else  {
             checkBoxGreen2.setVisibility(View.GONE);
         }
         if (lutemons.size() > 2) {
             checkBoxPink2.setText(lutemons.get(2).getName()+" ("+lutemons.get(2).getColor()+")");
-            lutemons.get(2).setId(id);
         } else {
             checkBoxPink2.setVisibility(View.GONE);
         }
         if (lutemons.size() > 3) {
             checkBoxOrange2.setText(lutemons.get(3).getName()+" ("+lutemons.get(3).getColor()+")");
-            lutemons.get(3).setId(id);
         }
         else {
             checkBoxOrange2.setVisibility(View.GONE);
         }
         if (lutemons.size() > 4) {
             checkBoxBlack2.setText(lutemons.get(4).getName()+" ("+lutemons.get(4).getColor()+")");
-            lutemons.get(4).setId(id);
         }
         else {
             checkBoxBlack2.setVisibility(View.GONE);
         }
+
         return view;
     }
+
+    public void switchToTrainLutemons(View view) {
+        Intent intent = new Intent(getActivity(), TrainLutemons.class);
+        startActivity(intent);
+    }
 }
+

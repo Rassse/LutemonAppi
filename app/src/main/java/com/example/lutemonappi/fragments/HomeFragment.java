@@ -1,5 +1,6 @@
 package com.example.lutemonappi.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -17,6 +18,7 @@ import android.widget.RadioGroup;
 import com.example.lutemonappi.Lutemon;
 import com.example.lutemonappi.LutemonListAdapter;
 import com.example.lutemonappi.R;
+import com.example.lutemonappi.RestLutemons;
 import com.example.lutemonappi.Storage;
 
 import java.util.ArrayList;
@@ -29,6 +31,7 @@ import java.util.ArrayList;
 public class HomeFragment extends Fragment {
 
     private Storage storage;
+    private int id = 0;
     private CheckBox checkBoxWhite, checkBoxGreen, checkBoxPink, checkBoxOrange, checkBoxBlack;
     private ArrayList<Lutemon> lutemons = new ArrayList<>();
 
@@ -87,7 +90,6 @@ public class HomeFragment extends Fragment {
         checkBoxBlack = view.findViewById(R.id.checkBoxBlack);
         RadioGroup rgLutemonWhereabouts = view.findViewById(R.id.rgLutemonHome);
         int checkId = rgLutemonWhereabouts.getCheckedRadioButtonId();
-        int id = 0;
         if (checkId == R.id.radioButtonHomeHome) {
             id = 1;
         }
@@ -132,8 +134,13 @@ public class HomeFragment extends Fragment {
             checkBoxBlack.setVisibility(View.GONE);
         }
 
-        System.out.println(lutemons.get(1).getId());
 
         return view;
+    }
+    public void moveHome(View view) {
+        if (id == 1) {
+            Intent intent = new Intent(getActivity(), RestLutemons.class);
+            startActivity(intent);
+        }
     }
 }

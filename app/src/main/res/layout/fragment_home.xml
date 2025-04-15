@@ -98,7 +98,7 @@
         <RadioButton
             android:id="@+id/radioButtonFightHome"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="59dp"
             android:text="Taistelemaan" />
     </RadioGroup>
 
@@ -107,6 +107,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="28dp"
+        android:onClick="moveHome"
         android:text="Siirrä valitut Lutemonit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
