@@ -69,8 +69,10 @@ public class Storage {
     }
 
     public void listLutemonsInformation() {
+        // Copilot helped me to idealize using order for the number of monster //
+        int order  = 1;
         for (Lutemon lutemon : lutemons) {
-            lutemon.printSpecs();
+            lutemon.printSpecs(order++);
         }
     }
 

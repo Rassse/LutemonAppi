@@ -76,7 +76,7 @@ public class TrainingFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_training, container, false);
 
         storage = Storage.getInstance();
-        ArrayList<Lutemon> lutemons = storage.getLutemons();
+        lutemons = storage.getLutemons();
         checkBoxWhite2 = view.findViewById(R.id.checkBoxWhite2);
         checkBoxGreen2 = view.findViewById(R.id.checkBoxGreen2);
         checkBoxPink2= view.findViewById(R.id.checkBoxPink2);

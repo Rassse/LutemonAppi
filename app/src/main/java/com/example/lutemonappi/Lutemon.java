@@ -14,7 +14,6 @@ public class Lutemon implements Serializable {
         this.experience = 0;
         this.maxHealth = 0;
 
-
         // DeepSeek helped me to ideate method to get the default values for colors //
         if (color == "Valkoinen") {
             this.attack = 5;
@@ -79,8 +78,8 @@ public class Lutemon implements Serializable {
         return attack;
     }
 
-    public void printSpecs() {
-        System.out.println(name + " : " + color + ", " + health);
+    public void printSpecs(int order) {
+        System.out.println(order + name + " : " + color + ", " + health);
     }
 
     public void setAttack(int attack) {
@@ -128,6 +127,20 @@ public class Lutemon implements Serializable {
         this.id = id;
     }
 
+    public int getOrder() {
+        return order;
+    }
+
+    public int getIdCounter() {
+        return idCounter;
+    }
+    public void defence(Lutemon lutemon) {
+        //
+    }
+    public void attack() {
+        System.out.println(color + "("+name+") attacks");
+    }
+
     protected String name;
     protected String color;
     protected int attack;
@@ -137,4 +150,5 @@ public class Lutemon implements Serializable {
     protected int maxHealth;
     protected int id;
     protected int idCounter;
+    protected int order;
 }

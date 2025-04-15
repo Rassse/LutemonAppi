@@ -81,13 +81,33 @@ public class FightFragment extends Fragment {
         checkBoxOrange3 = view.findViewById(R.id.checkBoxOrange3);
         checkBoxBlack3 = view.findViewById(R.id.checkBoxBlack3);
 
-        checkBoxWhite3.setText(lutemons.get(0).getName());
-        checkBoxGreen3.setText(lutemons.get(1).getName());
-        checkBoxPink3.setText(lutemons.get(2).getName());
-        checkBoxOrange3.setText(lutemons.get(3).getName());
-        checkBoxBlack3.setText(lutemons.get(4).getName());
-
-
+        if (lutemons.size() > 0) {
+            checkBoxWhite3.setText(lutemons.get(0).getName() + " (" + lutemons.get(0).getColor() + ")");
+        } else  {
+            checkBoxWhite3.setVisibility(View.GONE);
+        }
+        if (lutemons.size() > 1) {
+            checkBoxGreen3.setText(lutemons.get(1).getName() + " (" + lutemons.get(1).getColor() + ")");
+        } else  {
+            checkBoxGreen3.setVisibility(View.GONE);
+        }
+        if (lutemons.size() > 2) {
+            checkBoxPink3.setText(lutemons.get(2).getName()+" ("+lutemons.get(2).getColor()+")");
+        } else {
+            checkBoxPink3.setVisibility(View.GONE);
+        }
+        if (lutemons.size() > 3) {
+            checkBoxOrange3.setText(lutemons.get(3).getName()+" ("+lutemons.get(3).getColor()+")");
+        }
+        else {
+            checkBoxOrange3.setVisibility(View.GONE);
+        }
+        if (lutemons.size() > 4) {
+            checkBoxBlack3.setText(lutemons.get(4).getName()+" ("+lutemons.get(4).getColor()+")");
+        }
+        else {
+            checkBoxBlack3.setVisibility(View.GONE);
+        }
 
         return view;
     }
