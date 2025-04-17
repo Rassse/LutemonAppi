@@ -29,6 +29,7 @@ public class TrainingFragment extends Fragment {
     private Storage storage;
     private CheckBox checkBoxWhite2, checkBoxGreen2, checkBoxPink2, checkBoxOrange2, checkBoxBlack2;
     private ArrayList<Lutemon> lutemons = new ArrayList<>();
+    private RadioGroup rgLutemonWhereAbouts;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -87,7 +88,7 @@ public class TrainingFragment extends Fragment {
         moveButtonsTrain.setOnClickListener((View v) -> {
             switchToTrainLutemons(v);
         });
-        RadioGroup rgLutemonWhereAbouts = view.findViewById(R.id.rgTraining);
+        rgLutemonWhereAbouts = view.findViewById(R.id.rgTraining);
         int checkId = rgLutemonWhereAbouts.getCheckedRadioButtonId();
         // Copilot helped me to check Id through iteration rather than long if else clauses //
         ArrayList<Lutemon> lutemonsInTraining = new ArrayList<>();
@@ -99,28 +100,28 @@ public class TrainingFragment extends Fragment {
 
         // Copilot helped me figure out that I can check lutemons.size() to retrieve the lutemons color right to the checkBoxes //
         if (lutemons.size() > 0) {
-            checkBoxWhite2.setText(lutemons.get(0).getName() + " (" + lutemons.get(0).getColor() + ")");
+            checkBoxWhite2.setText(lutemonsInTraining.get(0).getName() + " (" + lutemonsInTraining.get(0).getColor() + ")");
         } else  {
             checkBoxWhite2.setVisibility(View.GONE);
         }
         if (lutemons.size() > 1) {
-            checkBoxGreen2.setText(lutemons.get(1).getName() + " (" + lutemons.get(1).getColor() + ")");
+            checkBoxGreen2.setText(lutemonsInTraining.get(1).getName() + " (" + lutemonsInTraining.get(1).getColor() + ")");
         } else  {
             checkBoxGreen2.setVisibility(View.GONE);
         }
         if (lutemons.size() > 2) {
-            checkBoxPink2.setText(lutemons.get(2).getName()+" ("+lutemons.get(2).getColor()+")");
+            checkBoxPink2.setText(lutemonsInTraining.get(2).getName()+" ("+lutemonsInTraining.get(2).getColor()+")");
         } else {
             checkBoxPink2.setVisibility(View.GONE);
         }
         if (lutemons.size() > 3) {
-            checkBoxOrange2.setText(lutemons.get(3).getName()+" ("+lutemons.get(3).getColor()+")");
+            checkBoxOrange2.setText(lutemonsInTraining.get(3).getName()+" ("+lutemonsInTraining.get(3).getColor()+")");
         }
         else {
             checkBoxOrange2.setVisibility(View.GONE);
         }
         if (lutemons.size() > 4) {
-            checkBoxBlack2.setText(lutemons.get(4).getName()+" ("+lutemons.get(4).getColor()+")");
+            checkBoxBlack2.setText(lutemonsInTraining.get(4).getName()+" ("+lutemonsInTraining.get(4).getColor()+")");
         }
         else {
             checkBoxBlack2.setVisibility(View.GONE);

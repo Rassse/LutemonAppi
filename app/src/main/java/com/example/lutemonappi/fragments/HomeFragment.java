@@ -17,6 +17,7 @@ import com.example.lutemonappi.Lutemon;
 import com.example.lutemonappi.R;
 import com.example.lutemonappi.RestLutemons;
 import com.example.lutemonappi.Storage;
+import com.example.lutemonappi.TrainLutemons;
 
 import java.util.ArrayList;
 
@@ -32,6 +33,8 @@ public class HomeFragment extends Fragment {
     private CheckBox checkBoxWhite, checkBoxGreen, checkBoxPink, checkBoxOrange, checkBoxBlack;
     private ArrayList<Lutemon> lutemons = new ArrayList<>();
     private RadioGroup rgLutemonWhereabouts;
+    private Lutemon whiteLutemon, greenLutemon, pinkLutemon, orangeLutemon, blackLutemon;
+    private int checkId;
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -97,7 +100,7 @@ public class HomeFragment extends Fragment {
         checkBoxPink = view.findViewById(R.id.checkBoxPink);
         checkBoxOrange = view.findViewById(R.id.checkBoxOrange);
         checkBoxBlack = view.findViewById(R.id.checkBoxBlack);
-        RadioGroup rgLutemonWhereabouts = view.findViewById(R.id.rgLutemonHome);
+        rgLutemonWhereabouts = view.findViewById(R.id.rgLutemonHome);
         int checkId = rgLutemonWhereabouts.getCheckedRadioButtonId();
         if (checkId == R.id.radioButtonHomeHome) {
             valueId = 1;
@@ -110,28 +113,33 @@ public class HomeFragment extends Fragment {
         }
         // Copilot helped me figure out that I can check lutemons.size() to retrieve the lutemons color right to the checkBoxes //
         if (lutemons.size() > 0) {
-            checkBoxWhite.setText(lutemons.get(0).getName() + " (" + lutemons.get(0).getColor() + ")");
+            checkBoxWhite.setText(lutemons_here.get(0).getName() + " (" + lutemons_here.get(0).getColor() + ")");
+            whiteLutemon = lutemons_here.get(0);
         } else  {
             checkBoxWhite.setVisibility(View.GONE);
         }
         if (lutemons.size() > 1) {
-            checkBoxGreen.setText(lutemons.get(1).getName() + " (" + lutemons.get(1).getColor() + ")");
+            checkBoxGreen.setText(lutemons_here.get(1).getName() + " (" + lutemons_here.get(1).getColor() + ")");
+            greenLutemon = lutemons_here.get(1);
         } else  {
             checkBoxGreen.setVisibility(View.GONE);
         }
         if (lutemons.size() > 2) {
-            checkBoxPink.setText(lutemons.get(2).getName()+" ("+lutemons.get(2).getColor()+")");
+            checkBoxPink.setText(lutemons_here.get(2).getName()+" ("+lutemons_here.get(2).getColor()+")");
+            pinkLutemon = lutemons_here.get(2);
         } else {
             checkBoxPink.setVisibility(View.GONE);
         }
         if (lutemons.size() > 3) {
-            checkBoxOrange.setText(lutemons.get(3).getName()+" ("+lutemons.get(3).getColor()+")");
+            checkBoxOrange.setText(lutemons_here.get(3).getName()+" ("+lutemons_here.get(3).getColor()+")");
+            orangeLutemon = lutemons_here.get(3);
         }
         else {
             checkBoxOrange.setVisibility(View.GONE);
         }
         if (lutemons.size() > 4) {
-            checkBoxBlack.setText(lutemons.get(4).getName()+" ("+lutemons.get(4).getColor()+")");
+            checkBoxBlack.setText(lutemons_here.get(4).getName()+" ("+lutemons_here.get(4).getColor()+")");
+            blackLutemon = lutemons_here.get(4);
         }
         else {
             checkBoxBlack.setVisibility(View.GONE);
@@ -145,34 +153,46 @@ public class HomeFragment extends Fragment {
         // I learned from Copilot to check the id of the lutemon, not go through long if else clauses //
         // Copilot helped me to only create one function, rather than what I had, three functions here doing basically the same thing //
         // The functions were just messy and redundant //
-        int checkId = rgLutemonWhereabouts.getCheckedRadioButtonId();
+        int location = 0;
         if (checkId == R.id.radioButtonHomeHome) {
-            for (Lutemon lutemon : storage.getLutemons()) {
-                if (lutemon.getId() != 1) {
-                    lutemon.setId(1);
-                }
-            }
-            storage.saveLutemons(getContext());
+            location = 1;
+        }
+        else if (checkId == R.id.radioButtonTrainHome) {
+            location = 2;
+        }
+        else if (checkId == R.id.radioButtonFightHome) {
+            location = 3;
+        }
+        if (checkBoxWhite.isChecked()) {
+            whiteLutemon.setId(location);
+        }
+        if (checkBoxGreen.isChecked()) {
+            greenLutemon.setId(location);
+        }
+        if (checkBoxPink.isChecked()) {
+            pinkLutemon.setId(location);
+        }
+        if (checkBoxOrange.isChecked()) {
+            orangeLutemon.setId(location);
+        }
+        if (checkBoxBlack.isChecked()) {
+            blackLutemon.setId(location);
+        }
+        storage.saveLutemons(getContext());
+
+        if (location == 1) {
             Intent intent = new Intent(getActivity(), RestLutemons.class);
             startActivity(intent);
         }
-        else if (checkId == R.id.radioButtonTrainHome) {
-            for (Lutemon lutemon : storage.getLutemons()) {
-                if (lutemon.getId() != 2) {
-                    lutemon.setId(2);
-                }
-            }
-            storage.saveLutemons(getContext());
+        else if (location == 2 ) {
+            Intent intent = new Intent(getActivity(), TrainLutemons.class);
+            startActivity(intent);
+        }
+        else if (location == 3) {
+            /* Intent intent = new Intent(getActivity(), FightLutemons.class);
+            startActivity(intent); */
         }
 
-        else if (checkId == R.id.radioButtonFightHome) {
-            for (Lutemon lutemon : storage.getLutemons()) {
-                if (lutemon.getId() != 3) {
-                    lutemon.setId(3);
-                }
-            }
-            storage.saveLutemons(getContext());
-        }
     }
     // https://stackoverflow.com/questions/11326155/fragment-onresume-onpause-is-not-called-on-backstack //
     @Override
