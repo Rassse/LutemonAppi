@@ -3,6 +3,7 @@ package com.example.lutemonappi.fragments;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 
@@ -80,7 +81,15 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        return inflater.inflate(R.layout.fragment_home, container, false);
+
+
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
         storage = Storage.getInstance();
         System.out.println(storage);
         Button moveButtonsHome = view.findViewById(R.id.moveButtonsHome);
@@ -144,14 +153,10 @@ public class HomeFragment extends Fragment {
             checkBoxBlack.setVisibility(View.GONE);
         }
 
-        return view;
     }
 
 
     public void moveLutemons(View view) {
-        // I learned from Copilot to check the id of the lutemon, not go through long if else clauses //
-        // Copilot helped me to only create one function, rather than what I had, three functions here doing basically the same thing //
-        // The functions were just messy and redundant //
         int location = 0;
         int checkId = rgLutemonWhereabouts.getCheckedRadioButtonId();
         if (checkId == R.id.radioButtonHomeHome) {
@@ -189,9 +194,10 @@ public class HomeFragment extends Fragment {
             startActivity(intent);
         }
         else if (location == 3) {
-            /* Intent intent = new Intent(getActivity(), FightLutemons.class);
+            /*Intent intent = new Intent(getActivity(), FightLutemons.class);
             startActivity(intent); */
         }
+
 
     }
     // https://stackoverflow.com/questions/11326155/fragment-onresume-onpause-is-not-called-on-backstack //
