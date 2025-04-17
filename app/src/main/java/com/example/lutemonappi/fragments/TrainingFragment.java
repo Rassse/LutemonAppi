@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.RadioGroup;
 
@@ -82,7 +83,10 @@ public class TrainingFragment extends Fragment {
         checkBoxPink2= view.findViewById(R.id.checkBoxPink2);
         checkBoxOrange2 = view.findViewById(R.id.checkBoxOrange2);
         checkBoxBlack2 = view.findViewById(R.id.checkBoxBlack2);
-
+        Button moveButtonsTrain = view.findViewById(R.id.moveButtonsTrain);
+        moveButtonsTrain.setOnClickListener((View v) -> {
+            switchToTrainLutemons(v);
+        });
         RadioGroup rgLutemonWhereAbouts = view.findViewById(R.id.rgTraining);
         int checkId = rgLutemonWhereAbouts.getCheckedRadioButtonId();
         // Copilot helped me to check Id through iteration rather than long if else clauses //
@@ -137,6 +141,12 @@ public class TrainingFragment extends Fragment {
             Intent intent = new Intent(getActivity(), TrainLutemons.class);
             startActivity(intent);
         }
+    }
+
+    // https://stackoverflow.com/questions/11326155/fragment-onresume-onpause-is-not-called-on-backstack //
+    @Override
+    public void onResume() {
+        super.onResume();
     }
 }
 

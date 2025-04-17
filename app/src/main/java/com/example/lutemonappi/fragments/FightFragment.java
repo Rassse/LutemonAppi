@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.RadioGroup;
 
@@ -80,6 +81,10 @@ public class FightFragment extends Fragment {
         checkBoxPink3= view.findViewById(R.id.checkBoxPink3);
         checkBoxOrange3 = view.findViewById(R.id.checkBoxOrange3);
         checkBoxBlack3 = view.findViewById(R.id.checkBoxBlack3);
+        Button buttonToFight = view.findViewById(R.id.buttonToFight);
+        buttonToFight.setOnClickListener((View v) -> {
+            toFightArea(v);
+        });
 
         if (lutemons.size() > 0) {
             checkBoxWhite3.setText(lutemons.get(0).getName() + " (" + lutemons.get(0).getColor() + ")");
@@ -110,5 +115,14 @@ public class FightFragment extends Fragment {
         }
 
         return view;
+    }
+
+    public void toFightArea(View view) {
+        System.out.println("Taisteluun");
+    }
+    // https://stackoverflow.com/questions/11326155/fragment-onresume-onpause-is-not-called-on-backstack //
+    @Override
+    public void onResume() {
+        super.onResume();
     }
 }

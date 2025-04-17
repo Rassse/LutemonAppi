@@ -81,6 +81,9 @@ public class HomeFragment extends Fragment {
         storage = Storage.getInstance();
         System.out.println(storage);
         Button moveButtonsHome = view.findViewById(R.id.moveButtonsHome);
+        moveButtonsHome.setOnClickListener((View v) -> {
+            moveLutemons(v);
+        });
         ArrayList<Lutemon> lutemons = storage.getLutemons();
         checkBoxWhite = view.findViewById(R.id.checkBoxWhite);
         checkBoxGreen = view.findViewById(R.id.checkBoxGreen);
@@ -139,6 +142,7 @@ public class HomeFragment extends Fragment {
 
 
     public void moveLutemons(View view) {
+
         // I learned from Copilot to check the id of the lutemon, not go through long if else clauses //
         // Copilot helped me to only create one function, rather than what I had, three functions here doing basically the same thing //
         // The functions were just messy and redundant //
@@ -171,6 +175,11 @@ public class HomeFragment extends Fragment {
             }
             storage.saveLutemons(getContext());
         }
+    }
+    // https://stackoverflow.com/questions/11326155/fragment-onresume-onpause-is-not-called-on-backstack //
+    @Override
+    public void onResume() {
+        super.onResume();
     }
 
 }

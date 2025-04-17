@@ -63,4 +63,10 @@ public class DeadFragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_dead, container, false);
     }
+
+    // https://stackoverflow.com/questions/11326155/fragment-onresume-onpause-is-not-called-on-backstack //
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
 }
