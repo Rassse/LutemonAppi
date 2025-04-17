@@ -76,6 +76,12 @@ public class FightFragment extends Fragment {
 
         storage = Storage.getInstance();
         ArrayList<Lutemon> lutemons = storage.getLutemons();
+        ArrayList<Lutemon> lutemonsInFight = new ArrayList<>();
+        for (Lutemon lutemon : lutemons) {
+            if (lutemon.getId() == 3) {
+                lutemonsInFight.add(lutemon);
+            }
+        }
         checkBoxWhite3 = view.findViewById(R.id.checkBoxWhite3);
         checkBoxGreen3 = view.findViewById(R.id.checkBoxGreen3);
         checkBoxPink3= view.findViewById(R.id.checkBoxPink3);

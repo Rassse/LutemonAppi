@@ -85,6 +85,12 @@ public class HomeFragment extends Fragment {
             moveLutemons(v);
         });
         ArrayList<Lutemon> lutemons = storage.getLutemons();
+        ArrayList<Lutemon> lutemons_here = new ArrayList<>();
+        for (Lutemon lutemon : lutemons) {
+            if (lutemon.getId() == 1) {
+                lutemons_here.add(lutemon);
+            }
+        }
         checkBoxWhite = view.findViewById(R.id.checkBoxWhite);
         checkBoxGreen = view.findViewById(R.id.checkBoxGreen);
         checkBoxPink = view.findViewById(R.id.checkBoxPink);
@@ -105,37 +111,31 @@ public class HomeFragment extends Fragment {
         // Copilot helped me figure out that I can check lutemons.size() to retrieve the lutemons color right to the checkBoxes //
         if (lutemons.size() > 0) {
             checkBoxWhite.setText(lutemons.get(0).getName() + " (" + lutemons.get(0).getColor() + ")");
-            lutemons.get(0).setId(valueId);
         } else  {
             checkBoxWhite.setVisibility(View.GONE);
         }
         if (lutemons.size() > 1) {
             checkBoxGreen.setText(lutemons.get(1).getName() + " (" + lutemons.get(1).getColor() + ")");
-            lutemons.get(1).setId(valueId);
         } else  {
             checkBoxGreen.setVisibility(View.GONE);
         }
         if (lutemons.size() > 2) {
             checkBoxPink.setText(lutemons.get(2).getName()+" ("+lutemons.get(2).getColor()+")");
-            lutemons.get(2).setId(valueId);
         } else {
             checkBoxPink.setVisibility(View.GONE);
         }
         if (lutemons.size() > 3) {
             checkBoxOrange.setText(lutemons.get(3).getName()+" ("+lutemons.get(3).getColor()+")");
-            lutemons.get(3).setId(valueId);
         }
         else {
             checkBoxOrange.setVisibility(View.GONE);
         }
         if (lutemons.size() > 4) {
             checkBoxBlack.setText(lutemons.get(4).getName()+" ("+lutemons.get(4).getColor()+")");
-            lutemons.get(4).setId(valueId);
         }
         else {
             checkBoxBlack.setVisibility(View.GONE);
         }
-
 
         return view;
     }
