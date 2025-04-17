@@ -139,15 +139,10 @@ public class HomeFragment extends Fragment {
 
 
     public void moveLutemons(View view) {
-        // Copilot helped me debug constant crashing in this part of code, with this error handling //
-        View rootView = getView();
-        if (rootView == null) {
-            return;
-        }
         // I learned from Copilot to check the id of the lutemon, not go through long if else clauses //
         // Copilot helped me to only create one function, rather than what I had, three functions here doing basically the same thing //
         // The functions were just messy and redundant //
-        RadioGroup rgLutemonWhereabouts = rootView.findViewById(R.id.rgLutemonHome);
+        RadioGroup rgLutemonWhereabouts = view.findViewById(R.id.rgLutemonHome);
         int checkId = rgLutemonWhereabouts.getCheckedRadioButtonId();
         if (checkId == R.id.radioButtonHomeHome) {
             for (Lutemon lutemon : storage.getLutemons()) {
