@@ -31,6 +31,7 @@ public class HomeFragment extends Fragment {
     private int valueId = 0;
     private CheckBox checkBoxWhite, checkBoxGreen, checkBoxPink, checkBoxOrange, checkBoxBlack;
     private ArrayList<Lutemon> lutemons = new ArrayList<>();
+    private RadioGroup rgLutemonWhereabouts;
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -107,7 +108,6 @@ public class HomeFragment extends Fragment {
         else if (checkId == R.id.radioButtonFightHome) {
             valueId = 3;
         }
-
         // Copilot helped me figure out that I can check lutemons.size() to retrieve the lutemons color right to the checkBoxes //
         if (lutemons.size() > 0) {
             checkBoxWhite.setText(lutemons.get(0).getName() + " (" + lutemons.get(0).getColor() + ")");
@@ -142,11 +142,9 @@ public class HomeFragment extends Fragment {
 
 
     public void moveLutemons(View view) {
-
         // I learned from Copilot to check the id of the lutemon, not go through long if else clauses //
         // Copilot helped me to only create one function, rather than what I had, three functions here doing basically the same thing //
         // The functions were just messy and redundant //
-        RadioGroup rgLutemonWhereabouts = view.findViewById(R.id.rgLutemonHome);
         int checkId = rgLutemonWhereabouts.getCheckedRadioButtonId();
         if (checkId == R.id.radioButtonHomeHome) {
             for (Lutemon lutemon : storage.getLutemons()) {
