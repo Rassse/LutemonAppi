@@ -11,8 +11,7 @@
         android:id="@+id/checkBoxWhite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="111dp"
-        android:layout_marginEnd="204dp"
+        android:layout_marginStart="140dp"
         android:text="CheckBox"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -25,15 +24,14 @@
         android:id="@+id/checkBoxGreen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="103dp"
-        android:layout_marginEnd="212dp"
+        android:layout_marginEnd="175dp"
         android:text="CheckBox"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.185" />
+        app:layout_constraintVertical_bias="0.181" />
 
     <CheckBox
         android:id="@+id/checkBoxPink"
@@ -42,10 +40,10 @@
         android:text="CheckBox"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.352"
+        app:layout_constraintHorizontal_bias="0.444"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.292" />
+        app:layout_constraintVertical_bias="0.307" />
 
     <CheckBox
         android:id="@+id/checkBoxOrange"
@@ -54,7 +52,7 @@
         android:text="CheckBox"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.352"
+        app:layout_constraintHorizontal_bias="0.444"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.427" />
@@ -66,10 +64,10 @@
         android:text="CheckBox"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.352"
+        app:layout_constraintHorizontal_bias="0.444"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.591" />
+        app:layout_constraintVertical_bias="0.547" />
 
     <RadioGroup
         android:id="@+id/rgLutemonHome"
@@ -107,11 +105,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="28dp"
-        android:onClick="moveHome"
+        android:onClick="moveLutemons"
         android:text="Siirrä valitut Lutemonit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:toggleCheckedStateOnClick="true" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

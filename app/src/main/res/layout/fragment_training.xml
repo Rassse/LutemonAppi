@@ -13,11 +13,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="120dp"
         android:layout_marginEnd="120dp"
-        android:layout_marginBottom="404dp"
+        android:layout_marginBottom="508dp"
         android:text="CheckBox"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent" />
 
     <CheckBox
@@ -26,11 +25,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="120dp"
         android:layout_marginEnd="120dp"
-        android:layout_marginBottom="488dp"
+        android:layout_marginBottom="592dp"
         android:text="CheckBox"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent" />
 
     <CheckBox
@@ -39,11 +37,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="120dp"
         android:layout_marginEnd="120dp"
-        android:layout_marginBottom="572dp"
+        android:layout_marginBottom="684dp"
         android:text="CheckBox"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent" />
 
     <CheckBox
@@ -72,21 +70,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/checkBoxBlack2" />
 
-    <Button
-        android:id="@+id/moveButtonsTrain"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="48dp"
-        android:onClick="switchToTrainLutemons"
-        android:text="Siirrä valitut Lutemonit"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <RadioGroup
         android:id="@+id/rgTraining"
-        android:layout_width="116dp"
+        android:layout_width="175dp"
         android:layout_height="138dp"
         android:layout_marginTop="60dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -101,16 +87,27 @@
 
         <RadioButton
             android:id="@+id/radioButtonTrainTrain"
-            android:layout_width="146dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Treenaamaan" />
 
         <RadioButton
             android:id="@+id/radioButtonFightTrain"
-            android:layout_width="wrap_content"
-            android:layout_height="48dp"
-            android:minHeight="48dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:minHeight="54dp"
             android:text="Taistelemaan" />
     </RadioGroup>
+
+    <Button
+        android:id="@+id/moveButtonsTrain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="128dp"
+        android:onClick="switchToTrainLutemons"
+        android:text="Siirrä valitut Lutemonit"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

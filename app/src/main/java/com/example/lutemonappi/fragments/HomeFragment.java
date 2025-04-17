@@ -4,19 +4,16 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import android.provider.MediaStore;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.RadioGroup;
 
-
 import com.example.lutemonappi.Lutemon;
-import com.example.lutemonappi.LutemonListAdapter;
 import com.example.lutemonappi.R;
 import com.example.lutemonappi.RestLutemons;
 import com.example.lutemonappi.Storage;
@@ -31,7 +28,7 @@ import java.util.ArrayList;
 public class HomeFragment extends Fragment {
 
     private Storage storage;
-    private int id = 0;
+    private int valueId = 0;
     private CheckBox checkBoxWhite, checkBoxGreen, checkBoxPink, checkBoxOrange, checkBoxBlack;
     private ArrayList<Lutemon> lutemons = new ArrayList<>();
 
@@ -82,6 +79,8 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         storage = Storage.getInstance();
+        System.out.println(storage);
+        Button moveButtonsHome = view.findViewById(R.id.moveButtonsHome);
         ArrayList<Lutemon> lutemons = storage.getLutemons();
         checkBoxWhite = view.findViewById(R.id.checkBoxWhite);
         checkBoxGreen = view.findViewById(R.id.checkBoxGreen);
@@ -91,44 +90,44 @@ public class HomeFragment extends Fragment {
         RadioGroup rgLutemonWhereabouts = view.findViewById(R.id.rgLutemonHome);
         int checkId = rgLutemonWhereabouts.getCheckedRadioButtonId();
         if (checkId == R.id.radioButtonHomeHome) {
-            id = 1;
+            valueId = 1;
         }
         else if (checkId == R.id.radioButtonTrainHome) {
-            id = 2;
+            valueId = 2;
         }
         else if (checkId == R.id.radioButtonFightHome) {
-            id = 3;
+            valueId = 3;
         }
 
         // Copilot helped me figure out that I can check lutemons.size() to retrieve the lutemons color right to the checkBoxes //
         if (lutemons.size() > 0) {
             checkBoxWhite.setText(lutemons.get(0).getName() + " (" + lutemons.get(0).getColor() + ")");
-            lutemons.get(0).setId(id);
+            lutemons.get(0).setId(valueId);
         } else  {
             checkBoxWhite.setVisibility(View.GONE);
         }
         if (lutemons.size() > 1) {
             checkBoxGreen.setText(lutemons.get(1).getName() + " (" + lutemons.get(1).getColor() + ")");
-            lutemons.get(1).setId(id);
+            lutemons.get(1).setId(valueId);
         } else  {
             checkBoxGreen.setVisibility(View.GONE);
         }
         if (lutemons.size() > 2) {
             checkBoxPink.setText(lutemons.get(2).getName()+" ("+lutemons.get(2).getColor()+")");
-            lutemons.get(2).setId(id);
+            lutemons.get(2).setId(valueId);
         } else {
             checkBoxPink.setVisibility(View.GONE);
         }
         if (lutemons.size() > 3) {
             checkBoxOrange.setText(lutemons.get(3).getName()+" ("+lutemons.get(3).getColor()+")");
-            lutemons.get(3).setId(id);
+            lutemons.get(3).setId(valueId);
         }
         else {
             checkBoxOrange.setVisibility(View.GONE);
         }
         if (lutemons.size() > 4) {
             checkBoxBlack.setText(lutemons.get(4).getName()+" ("+lutemons.get(4).getColor()+")");
-            lutemons.get(4).setId(id);
+            lutemons.get(4).setId(valueId);
         }
         else {
             checkBoxBlack.setVisibility(View.GONE);
@@ -137,10 +136,46 @@ public class HomeFragment extends Fragment {
 
         return view;
     }
-    public void moveHome(View view) {
-        if (id == 1) {
+
+
+    public void moveLutemons(View view) {
+        // Copilot helped me debug constant crashing in this part of code, with this error handling //
+        View rootView = getView();
+        if (rootView == null) {
+            return;
+        }
+        // I learned from Copilot to check the id of the lutemon, not go through long if else clauses //
+        // Copilot helped me to only create one function, rather than what I had, three functions here doing basically the same thing //
+        // The functions were just messy and redundant //
+        RadioGroup rgLutemonWhereabouts = rootView.findViewById(R.id.rgLutemonHome);
+        int checkId = rgLutemonWhereabouts.getCheckedRadioButtonId();
+        if (checkId == R.id.radioButtonHomeHome) {
+            for (Lutemon lutemon : storage.getLutemons()) {
+                if (lutemon.getId() != 1) {
+                    lutemon.setId(1);
+                }
+            }
+            storage.saveLutemons(getContext());
             Intent intent = new Intent(getActivity(), RestLutemons.class);
             startActivity(intent);
         }
+        else if (checkId == R.id.radioButtonTrainHome) {
+            for (Lutemon lutemon : storage.getLutemons()) {
+                if (lutemon.getId() != 2) {
+                    lutemon.setId(2);
+                }
+            }
+            storage.saveLutemons(getContext());
+        }
+
+        else if (checkId == R.id.radioButtonFightHome) {
+            for (Lutemon lutemon : storage.getLutemons()) {
+                if (lutemon.getId() != 3) {
+                    lutemon.setId(3);
+                }
+            }
+            storage.saveLutemons(getContext());
+        }
     }
+
 }

@@ -30,4 +30,5 @@ public class ActivityNavigator extends AppCompatActivity {
         Intent intent = new Intent(this, MoveLutemons.class);
         startActivity(intent);
     }
+
 }

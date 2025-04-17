@@ -11,11 +11,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
+    private Storage storage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        storage = Storage.getInstance();
+        storage.loadLutemons(this);
     }
 
     public void addLutemon(View view) {
@@ -25,28 +28,25 @@ public class MainActivity extends AppCompatActivity {
         /* DeepSeek helped me to debug this part with the help of lecture material, I had to make a checkId variable and check the conditions based on that */
         if (checkId == R.id.radioButtonWhite) {
             Storage.getInstance().addLutemon(new Lutemon(name.getText().toString(), "Valkoinen"));
-            switchToActivityNavigator(view);
         }
         else if (checkId == R.id.radioButtonGreen) {
             Storage.getInstance().addLutemon(new Lutemon(name.getText().toString(), "Vihreä"));
-            switchToActivityNavigator(view);
         }
         else if (checkId == R.id.radioButtonPink) {
             Storage.getInstance().addLutemon(new Lutemon(name.getText().toString(), "Pinkki"));
-            switchToActivityNavigator(view);
         }
         else if (checkId == R.id.radioButtonOrange) {
             Storage.getInstance().addLutemon(new Lutemon(name.getText().toString(), "Oranssi"));
-            switchToActivityNavigator(view);
         }
         else if (checkId == R.id.radioButtonBlack) {
             Storage.getInstance().addLutemon(new Lutemon(name.getText().toString(), "Musta"));
-            switchToActivityNavigator(view);
         }
-
+        storage.saveLutemons(this);
+        // Copilot helped me to figure out I don't need to call the switchToActivityNavigator many times in else if clauses, only once, here below //
     }
     public void switchToActivityNavigator(View view) {
         Intent intent = new Intent(this, ActivityNavigator.class);
         startActivity(intent);
     }
+
 }

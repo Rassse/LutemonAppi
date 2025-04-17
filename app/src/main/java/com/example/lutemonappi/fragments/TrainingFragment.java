@@ -126,8 +126,17 @@ public class TrainingFragment extends Fragment {
     }
 
     public void switchToTrainLutemons(View view) {
-        Intent intent = new Intent(getActivity(), TrainLutemons.class);
-        startActivity(intent);
+        ArrayList<Lutemon> lutemonsInTraining = new ArrayList<>();
+        for (Lutemon lutemon : storage.getLutemons()) {
+            if (lutemon.getId() == 2) {
+                lutemonsInTraining.add(lutemon);
+            }
+        }
+        if (!lutemonsInTraining.isEmpty()) {
+            storage.saveLutemons(getContext());
+            Intent intent = new Intent(getActivity(), TrainLutemons.class);
+            startActivity(intent);
+        }
     }
 }
 
