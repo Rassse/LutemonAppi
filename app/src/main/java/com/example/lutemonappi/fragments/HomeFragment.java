@@ -34,7 +34,6 @@ public class HomeFragment extends Fragment {
     private ArrayList<Lutemon> lutemons = new ArrayList<>();
     private RadioGroup rgLutemonWhereabouts;
     private Lutemon whiteLutemon, greenLutemon, pinkLutemon, orangeLutemon, blackLutemon;
-    private int checkId;
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -154,6 +153,7 @@ public class HomeFragment extends Fragment {
         // Copilot helped me to only create one function, rather than what I had, three functions here doing basically the same thing //
         // The functions were just messy and redundant //
         int location = 0;
+        int checkId = rgLutemonWhereabouts.getCheckedRadioButtonId();
         if (checkId == R.id.radioButtonHomeHome) {
             location = 1;
         }
