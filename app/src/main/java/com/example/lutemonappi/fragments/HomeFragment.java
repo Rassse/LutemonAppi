@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 
@@ -14,6 +15,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.RadioGroup;
 
+import com.example.lutemonappi.FightActivity;
 import com.example.lutemonappi.Lutemon;
 import com.example.lutemonappi.R;
 import com.example.lutemonappi.RestLutemons;
@@ -98,11 +100,15 @@ public class HomeFragment extends Fragment {
         });
         ArrayList<Lutemon> lutemons = storage.getLutemons();
         ArrayList<Lutemon> lutemons_here = new ArrayList<>();
+        ConstraintLayout constraintLayout = view.findViewById(R.id.constraintLayoutId);
         for (Lutemon lutemon : lutemons) {
             if (lutemon.getId() == 1) {
                 lutemons_here.add(lutemon);
+                CheckBox checkBox = new CheckBox(getContext());
+
             }
         }
+
         checkBoxWhite = view.findViewById(R.id.checkBoxWhite);
         checkBoxGreen = view.findViewById(R.id.checkBoxGreen);
         checkBoxPink = view.findViewById(R.id.checkBoxPink);
@@ -120,32 +126,32 @@ public class HomeFragment extends Fragment {
             valueId = 3;
         }
         // Copilot helped me figure out that I can check lutemons.size() to retrieve the lutemons color right to the checkBoxes //
-        if (lutemons.size() > 0) {
+        if (lutemons_here.size() > 0) {
             checkBoxWhite.setText(lutemons_here.get(0).getName() + " (" + lutemons_here.get(0).getColor() + ")");
             whiteLutemon = lutemons_here.get(0);
         } else  {
             checkBoxWhite.setVisibility(View.GONE);
         }
-        if (lutemons.size() > 1) {
+        if (lutemons_here.size() > 1) {
             checkBoxGreen.setText(lutemons_here.get(1).getName() + " (" + lutemons_here.get(1).getColor() + ")");
             greenLutemon = lutemons_here.get(1);
         } else  {
             checkBoxGreen.setVisibility(View.GONE);
         }
-        if (lutemons.size() > 2) {
+        if (lutemons_here.size() > 2) {
             checkBoxPink.setText(lutemons_here.get(2).getName()+" ("+lutemons_here.get(2).getColor()+")");
             pinkLutemon = lutemons_here.get(2);
         } else {
             checkBoxPink.setVisibility(View.GONE);
         }
-        if (lutemons.size() > 3) {
+        if (lutemons_here.size() > 3) {
             checkBoxOrange.setText(lutemons_here.get(3).getName()+" ("+lutemons_here.get(3).getColor()+")");
             orangeLutemon = lutemons_here.get(3);
         }
         else {
             checkBoxOrange.setVisibility(View.GONE);
         }
-        if (lutemons.size() > 4) {
+        if (lutemons_here.size() > 4) {
             checkBoxBlack.setText(lutemons_here.get(4).getName()+" ("+lutemons_here.get(4).getColor()+")");
             blackLutemon = lutemons_here.get(4);
         }
@@ -194,8 +200,8 @@ public class HomeFragment extends Fragment {
             startActivity(intent);
         }
         else if (location == 3) {
-            /*Intent intent = new Intent(getActivity(), FightLutemons.class);
-            startActivity(intent); */
+            Intent intent = new Intent(getActivity(), FightActivity.class);
+            startActivity(intent);
         }
 
 

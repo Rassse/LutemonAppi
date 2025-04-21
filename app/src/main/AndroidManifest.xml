@@ -13,6 +13,13 @@
         android:theme="@style/Theme.LutemonAppi"
         tools:targetApi="31">
         <activity
+            android:name=".FightActivity"
+            android:exported="false" />
+        <activity
+            android:name=".FightActivity"
+            android:exported="false"
+            android:theme="@style/Theme.LutemonAppi" />
+        <activity
             android:name=".RestLutemons"
             android:exported="false" />
         <activity
@@ -26,12 +33,6 @@
             android:exported="false" />
         <activity
             android:name=".MoveLutemons"
-            android:exported="false" />
-        <activity
-            android:name=".FightActivity"
-            android:exported="false" />
-        <activity
-            android:name=".FightActivity"
             android:exported="false" />
         <activity
             android:name=".LutemonListActivityHome"
