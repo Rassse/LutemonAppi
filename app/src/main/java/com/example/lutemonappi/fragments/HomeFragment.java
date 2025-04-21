@@ -23,6 +23,7 @@ import com.example.lutemonappi.Storage;
 import com.example.lutemonappi.TrainLutemons;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -30,9 +31,10 @@ import java.util.ArrayList;
  * create an instance of this fragment.
  */
 public class HomeFragment extends Fragment {
-
+    // I learned from Copilot to create a list for checkboxes //
+    private List<CheckBox> checkBoxList = new ArrayList<>();
     private Storage storage;
-    private int valueId = 0;
+    private int valueId = 1;
     private CheckBox checkBoxWhite, checkBoxGreen, checkBoxPink, checkBoxOrange, checkBoxBlack;
     private ArrayList<Lutemon> lutemons = new ArrayList<>();
     private RadioGroup rgLutemonWhereabouts;
@@ -105,26 +107,27 @@ public class HomeFragment extends Fragment {
             if (lutemon.getId() == 1) {
                 lutemons_here.add(lutemon);
                 CheckBox checkBox = new CheckBox(getContext());
-
+                checkBox.setText(lutemon.getName() + " ("+lutemon.getColor()+")");
+                // Copilot helped me to generate unique ID I can access later on //
+                checkBox.setId(View.generateViewId());
+                checkBoxList.add(checkBox);
             }
         }
 
+        for (CheckBox checkBox : checkBoxList) {
+            if (checkBox.isChecked()) {
+                System.out.println(checkBox.getText());
+            }
+        }
+        /*
         checkBoxWhite = view.findViewById(R.id.checkBoxWhite);
         checkBoxGreen = view.findViewById(R.id.checkBoxGreen);
         checkBoxPink = view.findViewById(R.id.checkBoxPink);
         checkBoxOrange = view.findViewById(R.id.checkBoxOrange);
         checkBoxBlack = view.findViewById(R.id.checkBoxBlack);
-        rgLutemonWhereabouts = view.findViewById(R.id.rgLutemonHome);
-        int checkId = rgLutemonWhereabouts.getCheckedRadioButtonId();
-        if (checkId == R.id.radioButtonHomeHome) {
-            valueId = 1;
-        }
-        else if (checkId == R.id.radioButtonTrainHome) {
-            valueId = 2;
-        }
-        else if (checkId == R.id.radioButtonFightHome) {
-            valueId = 3;
-        }
+        */
+
+        /*
         // Copilot helped me figure out that I can check lutemons.size() to retrieve the lutemons color right to the checkBoxes //
         if (lutemons_here.size() > 0) {
             checkBoxWhite.setText(lutemons_here.get(0).getName() + " (" + lutemons_here.get(0).getColor() + ")");
@@ -158,11 +161,38 @@ public class HomeFragment extends Fragment {
         else {
             checkBoxBlack.setVisibility(View.GONE);
         }
-
+        */
     }
 
 
     public void moveLutemons(View view) {
+        rgLutemonWhereabouts = view.findViewById(R.id.rgLutemonHome);
+        int checkId = rgLutemonWhereabouts.getCheckedRadioButtonId();
+        if (checkId == R.id.radioButtonHomeHome) {
+            valueId = 1;
+        }
+        else if (checkId == R.id.radioButtonTrainHome) {
+            valueId = 2;
+        }
+        else if (checkId == R.id.radioButtonFightHome) {
+            valueId = 3;
+        }
+
+        for (CheckBox checkBox : checkBoxList) {
+            if (checkBox.isChecked()) {
+                for (Lutemon lutemon : storage.getLutemons()) {
+                    if (checkBox.getText().toString().contains(lutemon.getName())) {
+                        lutemon.setId(valueId);
+                    }
+                }
+            }
+        }
+
+        storage.saveLutemons(getContext());
+
+
+
+        /*
         int location = 0;
         int checkId = rgLutemonWhereabouts.getCheckedRadioButtonId();
         if (checkId == R.id.radioButtonHomeHome) {
@@ -189,20 +219,28 @@ public class HomeFragment extends Fragment {
         if (checkBoxBlack.isChecked()) {
             blackLutemon.setId(location);
         }
-        storage.saveLutemons(getContext());
+        */
+        // COpilot helped me to initialize intent here //
 
-        if (location == 1) {
-            Intent intent = new Intent(getActivity(), RestLutemons.class);
+        Intent intent = null;
+
+        if (valueId== 1) {
+            intent = new Intent(getActivity(), RestLutemons.class);
+        }
+        else if (valueId == 2 ) {
+            intent = new Intent(getActivity(), TrainLutemons.class);
+        }
+        else if (valueId== 3) {
+            intent = new Intent(getActivity(), FightActivity.class);
+        }
+        else if (valueId == 4) {
+            intent = new Intent(getActivity(), DeadFragment.class);
+        }
+        // Copilot helped me to debug that if I check intent != null it will solve some issues //
+        if (intent != null) {
             startActivity(intent);
         }
-        else if (location == 2 ) {
-            Intent intent = new Intent(getActivity(), TrainLutemons.class);
-            startActivity(intent);
-        }
-        else if (location == 3) {
-            Intent intent = new Intent(getActivity(), FightActivity.class);
-            startActivity(intent);
-        }
+
 
 
     }

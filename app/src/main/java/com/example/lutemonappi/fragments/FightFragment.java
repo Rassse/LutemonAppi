@@ -123,6 +123,7 @@ public class FightFragment extends Fragment {
         return view;
     }
 
+
     public void toFightArea(View view) {
         System.out.println("Taisteluun");
     }
