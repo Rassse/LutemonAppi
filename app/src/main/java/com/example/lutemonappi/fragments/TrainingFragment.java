@@ -3,6 +3,7 @@ package com.example.lutemonappi.fragments;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -18,6 +19,7 @@ import com.example.lutemonappi.Storage;
 import com.example.lutemonappi.TrainLutemons;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -26,7 +28,9 @@ import java.util.ArrayList;
  */
 public class TrainingFragment extends Fragment {
 
+    private List<CheckBox> checkBoxList = new ArrayList<>();
     private Storage storage;
+    private int valueId = 1;
     private CheckBox checkBoxWhite2, checkBoxGreen2, checkBoxPink2, checkBoxOrange2, checkBoxBlack2;
     private ArrayList<Lutemon> lutemons = new ArrayList<>();
     private RadioGroup rgLutemonWhereAbouts;
@@ -79,14 +83,9 @@ public class TrainingFragment extends Fragment {
 
         storage = Storage.getInstance();
         lutemons = storage.getLutemons();
-        checkBoxWhite2 = view.findViewById(R.id.checkBoxWhite2);
-        checkBoxGreen2 = view.findViewById(R.id.checkBoxGreen2);
-        checkBoxPink2= view.findViewById(R.id.checkBoxPink2);
-        checkBoxOrange2 = view.findViewById(R.id.checkBoxOrange2);
-        checkBoxBlack2 = view.findViewById(R.id.checkBoxBlack2);
         Button moveButtonsTrain = view.findViewById(R.id.moveButtonsTrain);
         moveButtonsTrain.setOnClickListener((View v) -> {
-            switchToTrainLutemons(v);
+            moveLutemons(v);
         });
         rgLutemonWhereAbouts = view.findViewById(R.id.rgTraining);
         int checkId = rgLutemonWhereAbouts.getCheckedRadioButtonId();
@@ -98,6 +97,20 @@ public class TrainingFragment extends Fragment {
             }
         }
 
+        ArrayList<Lutemon> lutemons = storage.getLutemons();
+        ArrayList<Lutemon> lutemons_here = new ArrayList<>();
+        ConstraintLayout constraintLayout = view.findViewById(R.id.constraintLayoutIdTraining);
+        for (Lutemon lutemon : lutemons) {
+            if (lutemon.getId() == 2) {
+                lutemons_here.add(lutemon);
+                CheckBox checkBox = new CheckBox(getContext());
+                checkBox.setText(lutemon.getName() + " ("+lutemon.getColor()+")");
+                // Copilot helped me to generate unique ID I can access later on //
+                checkBox.setId(View.generateViewId());
+                checkBoxList.add(checkBox);
+            }
+        }
+        /*
         // Copilot helped me figure out that I can check lutemons.size() to retrieve the lutemons color right to the checkBoxes //
         if (lutemons.size() > 0) {
             checkBoxWhite2.setText(lutemonsInTraining.get(0).getName() + " (" + lutemonsInTraining.get(0).getColor() + ")");
@@ -126,11 +139,12 @@ public class TrainingFragment extends Fragment {
         else {
             checkBoxBlack2.setVisibility(View.GONE);
         }
-
+        */
         return view;
     }
 
-    public void switchToTrainLutemons(View view) {
+    public void moveLutemons(View view) {
+        /*
         ArrayList<Lutemon> lutemonsInTraining = new ArrayList<>();
         for (Lutemon lutemon : storage.getLutemons()) {
             if (lutemon.getId() == 2) {
@@ -142,7 +156,30 @@ public class TrainingFragment extends Fragment {
             Intent intent = new Intent(getActivity(), TrainLutemons.class);
             startActivity(intent);
         }
+        */
+        rgLutemonWhereAbouts = view.findViewById(R.id.rgTraining);
+        int checkId = rgLutemonWhereAbouts.getCheckedRadioButtonId();
+        if (checkId == R.id.radioButtonHomeHome) {
+            valueId = 1;
+        }
+        else if (checkId == R.id.radioButtonTrainHome) {
+            valueId = 2;
+        }
+        else if (checkId == R.id.radioButtonFightHome) {
+            valueId = 3;
+        }
+        for (CheckBox checkBox : checkBoxList) {
+            if (checkBox.isChecked()) {
+                for (Lutemon lutemon : storage.getLutemons()) {
+                    if (checkBox.getText().toString().contains(lutemon.getName())) {
+                        lutemon.setId(valueId);
+                    }
+                }
+            }
+        }
     }
+
+
 
     // https://stackoverflow.com/questions/11326155/fragment-onresume-onpause-is-not-called-on-backstack //
     @Override
