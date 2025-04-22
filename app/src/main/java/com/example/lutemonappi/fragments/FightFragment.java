@@ -106,6 +106,8 @@ public class FightFragment extends Fragment {
         }
 
 
+
+
         /*
         if (lutemons.size() > 0) {
             checkBoxWhite3.setText(lutemons.get(0).getName() + " (" + lutemons.get(0).getColor() + ")");
@@ -143,7 +145,15 @@ public class FightFragment extends Fragment {
         System.out.println("Taisteluun");
 
         RadioGroup radioGroup = view.findViewById(R.id.constraintLayoutId);
+        int selectedLutemon = radioGroup.getCheckedRadioButtonId();
+        RadioButton radioButton = view.findViewById(selectedLutemon);
+        String name = radioButton.getText().toString();
+        for (Lutemon lutemon : storage.getLutemons()) {
+            if (name.contains(lutemon.getName())) {
+                lutemon.setId(3);
 
+            }
+        }
 
     }
     // https://stackoverflow.com/questions/11326155/fragment-onresume-onpause-is-not-called-on-backstack //
