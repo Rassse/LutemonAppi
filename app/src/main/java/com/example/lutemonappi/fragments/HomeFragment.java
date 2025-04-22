@@ -35,7 +35,6 @@ public class HomeFragment extends Fragment {
     private List<CheckBox> checkBoxList = new ArrayList<>();
     private Storage storage;
     private int valueId = 1;
-    private CheckBox checkBoxWhite, checkBoxGreen, checkBoxPink, checkBoxOrange, checkBoxBlack;
     private ArrayList<Lutemon> lutemons = new ArrayList<>();
     private RadioGroup rgLutemonWhereabouts;
     private Lutemon whiteLutemon, greenLutemon, pinkLutemon, orangeLutemon, blackLutemon;

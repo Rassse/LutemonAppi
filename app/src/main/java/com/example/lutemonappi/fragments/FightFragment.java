@@ -2,6 +2,7 @@ package com.example.lutemonappi.fragments;
 
 import android.os.Bundle;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.example.lutemonappi.Lutemon;
@@ -16,6 +18,7 @@ import com.example.lutemonappi.R;
 import com.example.lutemonappi.Storage;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,7 +26,7 @@ import java.util.ArrayList;
  * create an instance of this fragment.
  */
 public class FightFragment extends Fragment {
-
+    private List<CheckBox> checkBoxList = new ArrayList<>();
     private Storage storage;
     private CheckBox checkBoxWhite3, checkBoxGreen3, checkBoxPink3, checkBoxOrange3, checkBoxBlack3;
     private ArrayList<Lutemon> lutemons = new ArrayList<>();
@@ -74,6 +77,11 @@ public class FightFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_fight, container, false);
 
+
+        Button buttonToFight = view.findViewById(R.id.buttonToFight);
+        buttonToFight.setOnClickListener((View v) -> {
+            toFightArea(v);
+        });
         storage = Storage.getInstance();
         ArrayList<Lutemon> lutemons = storage.getLutemons();
         ArrayList<Lutemon> lutemonsInFight = new ArrayList<>();
@@ -82,16 +90,23 @@ public class FightFragment extends Fragment {
                 lutemonsInFight.add(lutemon);
             }
         }
-        checkBoxWhite3 = view.findViewById(R.id.checkBoxWhite3);
-        checkBoxGreen3 = view.findViewById(R.id.checkBoxGreen3);
-        checkBoxPink3= view.findViewById(R.id.checkBoxPink3);
-        checkBoxOrange3 = view.findViewById(R.id.checkBoxOrange3);
-        checkBoxBlack3 = view.findViewById(R.id.checkBoxBlack3);
-        Button buttonToFight = view.findViewById(R.id.buttonToFight);
-        buttonToFight.setOnClickListener((View v) -> {
-            toFightArea(v);
-        });
+        RadioGroup radioGroup = view.findViewById(R.id.rgFight);
 
+
+
+        for (Lutemon lutemon : lutemonsInFight) {
+            RadioButton radioButton = new RadioButton(getContext());
+            radioButton.setText(lutemon.getName() + " ("+lutemon.getColor()+")");
+            // COpilot showed be there is a genereateViewId() method to generate unique ids so I can access them easier //
+            radioButton.setId(View.generateViewId());
+            // I learned here to addView to radioGroup //
+            // https://stackoverflow.com/questions/11398103/how-to-use-addview-to-add-view-to-layout //
+            radioGroup.addView(radioButton);
+
+        }
+
+
+        /*
         if (lutemons.size() > 0) {
             checkBoxWhite3.setText(lutemons.get(0).getName() + " (" + lutemons.get(0).getColor() + ")");
         } else  {
@@ -119,13 +134,17 @@ public class FightFragment extends Fragment {
         else {
             checkBoxBlack3.setVisibility(View.GONE);
         }
-
+        */
         return view;
     }
 
 
     public void toFightArea(View view) {
         System.out.println("Taisteluun");
+
+        RadioGroup radioGroup = view.findViewById(R.id.constraintLayoutId);
+
+
     }
     // https://stackoverflow.com/questions/11326155/fragment-onresume-onpause-is-not-called-on-backstack //
     @Override
