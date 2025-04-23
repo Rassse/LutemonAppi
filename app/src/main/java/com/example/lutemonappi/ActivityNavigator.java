@@ -31,4 +31,9 @@ public class ActivityNavigator extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void switchToBattleArena(View view) {
+        Intent intent = new Intent(this, FightActivity.class);
+        startActivity(intent);
+    }
+
 }

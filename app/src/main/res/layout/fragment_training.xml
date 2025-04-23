@@ -8,6 +8,19 @@
     android:background="#DDE27932"
     tools:context=".fragments.TrainingFragment">
 
+    <LinearLayout
+        android:id="@+id/linearLayoutTrain"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"></LinearLayout>
+
     <RadioGroup
         android:id="@+id/rgTraining"
         android:layout_width="175dp"
@@ -32,9 +45,9 @@
         <RadioButton
             android:id="@+id/radioButtonFightTrain"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="69dp"
             android:minHeight="54dp"
-            android:text="Taistelemaan" />
+            android:text="Taisteluun" />
     </RadioGroup>
 
     <Button

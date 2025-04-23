@@ -7,8 +7,14 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import com.example.lutemonappi.Lutemon;
 import com.example.lutemonappi.R;
+import com.example.lutemonappi.Storage;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -21,6 +27,12 @@ public class DeadFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
+    private ArrayList<Lutemon> lutemons = new ArrayList<>();
+    private LinearLayout linearLayoutCheckBox;
+    private Storage storage;
+
+    private TextView textView;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -61,7 +73,25 @@ public class DeadFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_dead, container, false);
+        View view = inflater.inflate(R.layout.fragment_dead, container, false);
+
+        storage = Storage.getInstance();
+        lutemons = storage.getLutemons();
+
+        ArrayList<Lutemon> lutemons_here = new ArrayList<>();
+        linearLayoutCheckBox = view.findViewById(R.id.linearLayoutDead);
+        for (Lutemon lutemon : lutemons) {
+            if (lutemon.getId() == 4) {
+                lutemons_here.add(lutemon);
+            }
+        }
+        for (Lutemon lutemon : lutemons_here) {
+            TextView textView = new TextView(getContext());
+            textView.setText(lutemon.getName() + " ("+lutemon.getColor()+")");
+            // Copilot helped me to generate unique ID I can access later on //
+            linearLayoutCheckBox.addView(textView);
+        }
+        return view;
     }
 
     // https://stackoverflow.com/questions/11326155/fragment-onresume-onpause-is-not-called-on-backstack //

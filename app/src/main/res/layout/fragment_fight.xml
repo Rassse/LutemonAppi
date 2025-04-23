@@ -5,8 +5,19 @@
     android:id="@+id/clFight"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#A02323"
+    android:background="#F2F1F1"
     tools:context=".fragments.FightFragment">
+
+    <LinearLayout
+        android:id="@+id/linearLayoutFighting"
+        android:layout_width="411dp"
+        android:layout_height="471dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="8dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"></LinearLayout>
 
     <Button
         android:id="@+id/buttonToFight"

@@ -2,11 +2,22 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/constraintLayoutId"
+    android:id="@+id/clLayoutId"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#00BCD4"
     tools:context=".fragments.HomeFragment">
+
+    <LinearLayout
+        android:id="@+id/linearLayoutCheckBox"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="16dp"></LinearLayout>
 
     <RadioGroup
         android:id="@+id/rgLutemonHome"

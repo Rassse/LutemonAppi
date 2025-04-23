@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
@@ -28,7 +29,7 @@ import java.util.List;
 public class FightFragment extends Fragment {
     private List<CheckBox> checkBoxList = new ArrayList<>();
     private Storage storage;
-    private CheckBox checkBoxWhite3, checkBoxGreen3, checkBoxPink3, checkBoxOrange3, checkBoxBlack3;
+    private LinearLayout linearLayout;
     private ArrayList<Lutemon> lutemons = new ArrayList<>();
 
     // TODO: Rename parameter arguments, choose names that match
@@ -77,66 +78,27 @@ public class FightFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_fight, container, false);
 
-
         Button buttonToFight = view.findViewById(R.id.buttonToFight);
         buttonToFight.setOnClickListener((View v) -> {
             toFightArea(v);
         });
         storage = Storage.getInstance();
-        ArrayList<Lutemon> lutemons = storage.getLutemons();
-        ArrayList<Lutemon> lutemonsInFight = new ArrayList<>();
+        ArrayList<Lutemon> lutemons_in_fight = new ArrayList<>();
         for (Lutemon lutemon : lutemons) {
             if (lutemon.getId() == 3) {
-                lutemonsInFight.add(lutemon);
+                lutemons_in_fight.add(lutemon);
             }
         }
-        RadioGroup radioGroup = view.findViewById(R.id.rgFight);
-
-
-
-        for (Lutemon lutemon : lutemonsInFight) {
-            RadioButton radioButton = new RadioButton(getContext());
-            radioButton.setText(lutemon.getName() + " ("+lutemon.getColor()+")");
+        linearLayout = view.findViewById(R.id.linearLayoutFighting);
+        for (Lutemon lutemon : lutemons_in_fight) {
+            CheckBox checkBox = new CheckBox(getContext());
+            checkBox.setText(lutemon.getName() + " ("+lutemon.getColor()+")");
             // COpilot showed be there is a genereateViewId() method to generate unique ids so I can access them easier //
-            radioButton.setId(View.generateViewId());
-            // I learned here to addView to radioGroup //
-            // https://stackoverflow.com/questions/11398103/how-to-use-addview-to-add-view-to-layout //
-            radioGroup.addView(radioButton);
-
+            checkBox.setId(lutemon.getId());
+            linearLayout.addView(checkBox);
+            checkBoxList.add(checkBox);
         }
 
-
-
-
-        /*
-        if (lutemons.size() > 0) {
-            checkBoxWhite3.setText(lutemons.get(0).getName() + " (" + lutemons.get(0).getColor() + ")");
-        } else  {
-            checkBoxWhite3.setVisibility(View.GONE);
-        }
-        if (lutemons.size() > 1) {
-            checkBoxGreen3.setText(lutemons.get(1).getName() + " (" + lutemons.get(1).getColor() + ")");
-        } else  {
-            checkBoxGreen3.setVisibility(View.GONE);
-        }
-        if (lutemons.size() > 2) {
-            checkBoxPink3.setText(lutemons.get(2).getName()+" ("+lutemons.get(2).getColor()+")");
-        } else {
-            checkBoxPink3.setVisibility(View.GONE);
-        }
-        if (lutemons.size() > 3) {
-            checkBoxOrange3.setText(lutemons.get(3).getName()+" ("+lutemons.get(3).getColor()+")");
-        }
-        else {
-            checkBoxOrange3.setVisibility(View.GONE);
-        }
-        if (lutemons.size() > 4) {
-            checkBoxBlack3.setText(lutemons.get(4).getName()+" ("+lutemons.get(4).getColor()+")");
-        }
-        else {
-            checkBoxBlack3.setVisibility(View.GONE);
-        }
-        */
         return view;
     }
 
@@ -144,7 +106,7 @@ public class FightFragment extends Fragment {
     public void toFightArea(View view) {
         System.out.println("Taisteluun");
 
-        RadioGroup radioGroup = view.findViewById(R.id.constraintLayoutId);
+        RadioGroup radioGroup = view.findViewById(R.id.clFight);
         int selectedLutemon = radioGroup.getCheckedRadioButtonId();
         RadioButton radioButton = view.findViewById(selectedLutemon);
         String name = radioButton.getText().toString();

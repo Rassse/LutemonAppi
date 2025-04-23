@@ -8,11 +8,13 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 
 import com.example.lutemonappi.FightActivity;
@@ -37,7 +39,7 @@ public class HomeFragment extends Fragment {
     private int valueId = 1;
     private ArrayList<Lutemon> lutemons = new ArrayList<>();
     private RadioGroup rgLutemonWhereabouts;
-    private Lutemon whiteLutemon, greenLutemon, pinkLutemon, orangeLutemon, blackLutemon;
+    private LinearLayout linearLayoutCheckBox;
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -94,159 +96,105 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         storage = Storage.getInstance();
-        System.out.println(storage);
+        rgLutemonWhereabouts = view.findViewById(R.id.rgLutemonHome);
         Button moveButtonsHome = view.findViewById(R.id.moveButtonsHome);
         moveButtonsHome.setOnClickListener((View v) -> {
             moveLutemons(v);
         });
-        ArrayList<Lutemon> lutemons = storage.getLutemons();
         ArrayList<Lutemon> lutemons_here = new ArrayList<>();
-        ConstraintLayout constraintLayout = view.findViewById(R.id.constraintLayoutId);
+        linearLayoutCheckBox = view.findViewById(R.id.linearLayoutCheckBox);
         for (Lutemon lutemon : lutemons) {
             if (lutemon.getId() == 1) {
                 lutemons_here.add(lutemon);
-                CheckBox checkBox = new CheckBox(getContext());
-                checkBox.setText(lutemon.getName() + " ("+lutemon.getColor()+")");
-                // Copilot helped me to generate unique ID I can access later on //
-                checkBox.setId(View.generateViewId());
-                checkBoxList.add(checkBox);
             }
         }
 
-        for (CheckBox checkBox : checkBoxList) {
-            if (checkBox.isChecked()) {
-                System.out.println(checkBox.getText());
-            }
+        for (Lutemon lutemon : lutemons_here) {
+            CheckBox checkBox = new CheckBox(getContext());
+            checkBox.setText(lutemon.getName() + " (" + lutemon.getColor() + ")");
+            // Copilot helped me to generate unique ID I can access later on //
+            checkBox.setId(View.generateViewId());
+            linearLayoutCheckBox.addView(checkBox);
+            checkBoxList.add(checkBox);
         }
-        /*
-        checkBoxWhite = view.findViewById(R.id.checkBoxWhite);
-        checkBoxGreen = view.findViewById(R.id.checkBoxGreen);
-        checkBoxPink = view.findViewById(R.id.checkBoxPink);
-        checkBoxOrange = view.findViewById(R.id.checkBoxOrange);
-        checkBoxBlack = view.findViewById(R.id.checkBoxBlack);
-        */
 
-        /*
-        // Copilot helped me figure out that I can check lutemons.size() to retrieve the lutemons color right to the checkBoxes //
-        if (lutemons_here.size() > 0) {
-            checkBoxWhite.setText(lutemons_here.get(0).getName() + " (" + lutemons_here.get(0).getColor() + ")");
-            whiteLutemon = lutemons_here.get(0);
-        } else  {
-            checkBoxWhite.setVisibility(View.GONE);
-        }
-        if (lutemons_here.size() > 1) {
-            checkBoxGreen.setText(lutemons_here.get(1).getName() + " (" + lutemons_here.get(1).getColor() + ")");
-            greenLutemon = lutemons_here.get(1);
-        } else  {
-            checkBoxGreen.setVisibility(View.GONE);
-        }
-        if (lutemons_here.size() > 2) {
-            checkBoxPink.setText(lutemons_here.get(2).getName()+" ("+lutemons_here.get(2).getColor()+")");
-            pinkLutemon = lutemons_here.get(2);
-        } else {
-            checkBoxPink.setVisibility(View.GONE);
-        }
-        if (lutemons_here.size() > 3) {
-            checkBoxOrange.setText(lutemons_here.get(3).getName()+" ("+lutemons_here.get(3).getColor()+")");
-            orangeLutemon = lutemons_here.get(3);
-        }
-        else {
-            checkBoxOrange.setVisibility(View.GONE);
-        }
-        if (lutemons_here.size() > 4) {
-            checkBoxBlack.setText(lutemons_here.get(4).getName()+" ("+lutemons_here.get(4).getColor()+")");
-            blackLutemon = lutemons_here.get(4);
-        }
-        else {
-            checkBoxBlack.setVisibility(View.GONE);
-        }
-        */
     }
 
 
     public void moveLutemons(View view) {
-        rgLutemonWhereabouts = view.findViewById(R.id.rgLutemonHome);
         int checkId = rgLutemonWhereabouts.getCheckedRadioButtonId();
         if (checkId == R.id.radioButtonHomeHome) {
             valueId = 1;
-        }
-        else if (checkId == R.id.radioButtonTrainHome) {
+        } else if (checkId == R.id.radioButtonTrainHome) {
             valueId = 2;
-        }
-        else if (checkId == R.id.radioButtonFightHome) {
+            Log.d("Works", "WOrks");
+        } else if (checkId == R.id.radioButtonFightHome) {
             valueId = 3;
         }
-
+        ArrayList<Lutemon> lutemons_moving = new ArrayList<>();
+        // I had trouble having the checkboxes visible or deleting them from the view //
+        // COpilot helped me to debug and I had to create a new Arraylist //
+        ArrayList<CheckBox> removeCheckBoxes = new ArrayList<>();
         for (CheckBox checkBox : checkBoxList) {
             if (checkBox.isChecked()) {
                 for (Lutemon lutemon : storage.getLutemons()) {
                     if (checkBox.getText().toString().contains(lutemon.getName())) {
                         lutemon.setId(valueId);
+                        lutemons_moving.add(lutemon);
+                        removeCheckBoxes.add(checkBox);
                     }
                 }
             }
         }
 
+        if (linearLayoutCheckBox == null) {
+            linearLayoutCheckBox = view.findViewById(R.id.linearLayoutCheckBox);
+        }
+        if (linearLayoutCheckBox != null) {
+            for (CheckBox checkBox : removeCheckBoxes) {
+                linearLayoutCheckBox.removeView(checkBox);
+                checkBoxList.remove(checkBox);
+            }
+
+        }
         storage.saveLutemons(getContext());
 
-
-
-        /*
-        int location = 0;
-        int checkId = rgLutemonWhereabouts.getCheckedRadioButtonId();
-        if (checkId == R.id.radioButtonHomeHome) {
-            location = 1;
-        }
-        else if (checkId == R.id.radioButtonTrainHome) {
-            location = 2;
-        }
-        else if (checkId == R.id.radioButtonFightHome) {
-            location = 3;
-        }
-        if (checkBoxWhite.isChecked()) {
-            whiteLutemon.setId(location);
-        }
-        if (checkBoxGreen.isChecked()) {
-            greenLutemon.setId(location);
-        }
-        if (checkBoxPink.isChecked()) {
-            pinkLutemon.setId(location);
-        }
-        if (checkBoxOrange.isChecked()) {
-            orangeLutemon.setId(location);
-        }
-        if (checkBoxBlack.isChecked()) {
-            blackLutemon.setId(location);
-        }
-        */
-        // COpilot helped me to initialize intent here //
-
         Intent intent = null;
-
-        if (valueId== 1) {
+        if (valueId == 1) {
             intent = new Intent(getActivity(), RestLutemons.class);
-        }
-        else if (valueId == 2 ) {
-            intent = new Intent(getActivity(), TrainLutemons.class);
-        }
-        else if (valueId== 3) {
-            intent = new Intent(getActivity(), FightActivity.class);
-        }
-        else if (valueId == 4) {
-            intent = new Intent(getActivity(), DeadFragment.class);
         }
         // Copilot helped me to debug that if I check intent != null it will solve some issues //
         if (intent != null) {
             startActivity(intent);
         }
-
-
-
     }
+
     // https://stackoverflow.com/questions/11326155/fragment-onresume-onpause-is-not-called-on-backstack //
     @Override
     public void onResume() {
         super.onResume();
+        lutemonWhereaboutsRefresher();
     }
 
+    private void lutemonWhereaboutsRefresher() {
+        lutemons = storage.getLutemons();
+        ArrayList<Lutemon> lutemons_here = new ArrayList<>();
+        for (Lutemon lutemon : lutemons) {
+            if (lutemon.getId() == 1) {
+                lutemons_here.add(lutemon);
+            }
+        }
+        linearLayoutCheckBox.removeAllViews();
+        checkBoxList.clear();
+
+        for (Lutemon lutemon : lutemons_here) {
+            CheckBox checkBox = new CheckBox(getContext());
+            checkBox.setText(lutemon.getName()+" ("+lutemon.getColor()+")");
+            checkBox.setId(View.generateViewId());
+            linearLayoutCheckBox.addView(checkBox);
+            checkBoxList.add(checkBox);
+        }
+
+
+    }
 }
