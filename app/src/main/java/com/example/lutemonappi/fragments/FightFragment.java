@@ -118,18 +118,22 @@ public class FightFragment extends Fragment {
         ArrayList<Lutemon> lutemons_to_fight = new ArrayList<>();
         for (CheckBox checkBox : checkBoxList) {
             if (checkBox.isChecked()) {
+                // Here I learned to use getTag and setTag methods //
+                // https://stackoverflow.com/questions/5291726/what-is-the-main-purpose-of-settag-gettag-methods-of-view //
                 Lutemon lutemon = (Lutemon) checkBox.getTag();
                 if (!lutemons_to_fight.contains(lutemon)) {
+                    Log.d("Toimii lisäys", "Niin kuin pitää");
                     lutemons_to_fight.add(lutemon);
                 }
             }
         }
-
+        // print lutemons to check it works //
         for (Lutemon lutemon : lutemons_to_fight) {
-            Log.d(lutemon.getName()+lutemon.getId(), "Toimii");
+            Log.d("Lutemon", "Nimi: " + lutemon.getName() + ", väri: " + lutemon.getColor());
         }
 
         if (lutemons_to_fight.size() == 2) {
+            Log.d("On kaksi Lutemonia", "kyllä");
             for (Lutemon lutemon : lutemons_to_fight) {
                 lutemon.setId(5);
             }
@@ -148,5 +152,29 @@ public class FightFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        lutemonStorageRefresher();
+    }
+
+    private void lutemonStorageRefresher() {
+        lutemons = storage.getLutemons();
+        ArrayList<Lutemon> lutemons_here = new ArrayList<>();
+        for (Lutemon lutemon : lutemons) {
+            // Copilot helped me fix a bug where fightfragment crashed by checking if lutemon is null //
+            // in addition to the id //
+            if (lutemon.getId() == 3) {
+                lutemons_here.add(lutemon);
+            }
+        }
+        linearLayout.removeAllViews();
+        checkBoxList.clear();
+
+        for (Lutemon lutemon : lutemons_here) {
+            CheckBox checkBox = new CheckBox(getContext());
+            checkBox.setText(lutemon.getName()+" ("+lutemon.getColor()+")");
+            checkBox.setId(View.generateViewId());
+            checkBox.setTag(lutemon);
+            linearLayout.addView(checkBox);
+            checkBoxList.add(checkBox);
+        }
     }
 }

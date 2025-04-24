@@ -80,8 +80,8 @@ public class Lutemon implements Serializable {
         return attack;
     }
 
-    public String printSpecs(int order) {
-        String specs = order + name + " : " + color + ", " + health;
+    public String printSpecs() {
+        String specs = name + " : " + color + ", " + health;
         return specs;
     }
 
@@ -147,7 +147,7 @@ public class Lutemon implements Serializable {
         this.health = Math.max(healthAfterAttack, 0);
 
         String fight = this.name+" taisteli Lutemonia "+ lutemon.getName() + " vastaan ja " +
-                        "otti tämän verran tuhoa  "+ damage + ". Nyt hänellä on " + this.health +" elämää jäljellä.";
+                        "otti tämän verran tuhoa "+ damage + "HP! Nyt hänellä on " + this.health +" elämää jäljellä.";
         return fight;
     }
     public String attack(Lutemon lutemon) {
@@ -159,8 +159,8 @@ public class Lutemon implements Serializable {
         // Ensuring the health doens't go below 0 //
         lutemon.setHealth(Math.max(healthAfterAttack, 0));
         this.experience += 1;
-        String fight = this.name+" hyökkäsi Lutemonia "+lutemon.getName()+" vastaan ja vahingoitti tämän verran häntä:  "+ damage + "."+
-                        lutemon.getName()+" elämät ovat nyt: "+lutemon.getHealth();
+        String fight = this.name+" hyökkäsi Lutemonia "+lutemon.getName()+" vastaan ja vahingoitti tämän verran häntä:  "+ damage + "HP! "+
+                        lutemon.getName()+" elämät ovat nyt: "+lutemon.getHealth() +"HP!";
 
         if (lutemon.getHealth() == 0) {
             fight += "\n"+lutemon.getName() + " kuoli! Lepää Rauhassa.";

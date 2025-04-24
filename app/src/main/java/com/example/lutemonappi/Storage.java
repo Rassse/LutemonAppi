@@ -71,9 +71,8 @@ public class Storage {
     public String listLutemonsInformation() {
         // Copilot helped me to idealize using order variable for the number of monster //
         String info = "";
-        int order  = 1;
         for (Lutemon lutemon : lutemons) {
-            info += lutemon.printSpecs(order++)+"\n";
+            info += lutemon.printSpecs()+"\n";
         }
         return info;
     }
