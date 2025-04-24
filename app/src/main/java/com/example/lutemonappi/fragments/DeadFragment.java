@@ -1,5 +1,6 @@
 package com.example.lutemonappi.fragments;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -15,6 +17,7 @@ import com.example.lutemonappi.R;
 import com.example.lutemonappi.Storage;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -33,6 +36,7 @@ public class DeadFragment extends Fragment {
     private Storage storage;
 
     private TextView textView;
+    private List<CheckBox> checkBoxList = new ArrayList<>();
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -85,12 +89,27 @@ public class DeadFragment extends Fragment {
                 lutemons_here.add(lutemon);
             }
         }
-        for (Lutemon lutemon : lutemons_here) {
-            TextView textView = new TextView(getContext());
-            textView.setText(lutemon.getName() + " ("+lutemon.getColor()+")");
-            // Copilot helped me to generate unique ID I can access later on //
-            linearLayoutCheckBox.addView(textView);
+
+        if (lutemons_here.isEmpty()) {
+            TextView textView = view.findViewById(R.id.textViewDead);
+            textView.setText("Ei kuolleita Lutemoneja.");
+            textView.setTextSize(24);
+            // I learned here to create bold text //
+            // https://stackoverflow.com/questions/17655103/how-to-set-typeface-for-textview-programmatically //
+            textView.setTypeface(null, Typeface.BOLD);
         }
+        else {
+            for (Lutemon lutemon : lutemons_here) {
+                CheckBox checkBox = new CheckBox(getContext());
+                checkBox.setText(lutemon.getName() + " (" + lutemon.getColor() + ")");
+                // Copilot helped me to generate unique ID I can access later on //
+                checkBox.setId(View.generateViewId());
+                linearLayoutCheckBox.addView(checkBox);
+                checkBoxList.add(checkBox);
+            }
+        }
+
+
         return view;
     }
 

@@ -39,18 +39,7 @@
         android:layout_marginStart="78dp"
         android:layout_marginTop="54dp"
         android:layout_marginEnd="117dp"
-        android:text="Valitse kaksi taistelijaa!"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <RadioGroup
-        android:id="@+id/rgFight"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="134dp"
-        android:layout_marginTop="326dp"
-        android:layout_marginEnd="277dp"
+        android:text="Valitse kaksi taistelijaa! Valmistaudu elämäsi taisteluun!!!"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

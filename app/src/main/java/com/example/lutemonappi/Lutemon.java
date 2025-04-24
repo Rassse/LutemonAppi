@@ -80,8 +80,9 @@ public class Lutemon implements Serializable {
         return attack;
     }
 
-    public void printSpecs(int order) {
-        System.out.println(order + name + " : " + color + ", " + health);
+    public String printSpecs(int order) {
+        String specs = order + name + " : " + color + ", " + health;
+        return specs;
     }
 
     public void setAttack(int attack) {
@@ -136,7 +137,7 @@ public class Lutemon implements Serializable {
     public int getIdCounter() {
         return idCounter;
     }
-    public void defence(Lutemon lutemon) {
+    public String defence(Lutemon lutemon) {
         int damage = this.defense - lutemon.getAttack();
         // Copilot helped me to check if damage is negative //
         if (damage < 0) {
@@ -145,10 +146,11 @@ public class Lutemon implements Serializable {
         int healthAfterAttack = this.health - damage;
         this.health = Math.max(healthAfterAttack, 0);
 
-        System.out.println(this.name+" defended against "+ lutemon.getName());
-        System.out.println("And took this amount of damage "+ damage);
+        String fight = this.name+" taisteli Lutemonia "+ lutemon.getName() + " vastaan ja " +
+                        "otti tämän verran tuhoa  "+ damage + ". Nyt hänellä on " + this.health +" elämää jäljellä.";
+        return fight;
     }
-    public void attack(Lutemon lutemon) {
+    public String attack(Lutemon lutemon) {
         int damage = this.attack - lutemon.getDefense();
         if (damage < 0) {
             damage = 0;
@@ -157,13 +159,14 @@ public class Lutemon implements Serializable {
         // Ensuring the health doens't go below 0 //
         lutemon.setHealth(Math.max(healthAfterAttack, 0));
         this.experience += 1;
-        System.out.println(this.name+" attackec"+" "+lutemon.getName()+" and damaged this amount "+ damage);
-        System.out.println(lutemon.getName()+" health is "+lutemon.getHealth());
+        String fight = this.name+" hyökkäsi Lutemonia "+lutemon.getName()+" vastaan ja vahingoitti tämän verran häntä:  "+ damage + "."+
+                        lutemon.getName()+" elämät ovat nyt: "+lutemon.getHealth();
 
         if (lutemon.getHealth() == 0) {
-            System.out.println(lutemon.getName() + " died! R.I.P.");
+            fight += "\n"+lutemon.getName() + " kuoli! Lepää Rauhassa.";
             Storage.getInstance().removeLutemon(lutemon.getId());
         }
+        return fight;
     }
 
     protected String name;

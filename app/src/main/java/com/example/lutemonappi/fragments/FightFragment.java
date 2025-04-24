@@ -1,10 +1,12 @@
 package com.example.lutemonappi.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +15,9 @@ import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
+import com.example.lutemonappi.FightActivity;
 import com.example.lutemonappi.Lutemon;
 import com.example.lutemonappi.R;
 import com.example.lutemonappi.Storage;
@@ -83,6 +87,7 @@ public class FightFragment extends Fragment {
             toFightArea(v);
         });
         storage = Storage.getInstance();
+        lutemons = storage.getLutemons();
         ArrayList<Lutemon> lutemons_in_fight = new ArrayList<>();
         for (Lutemon lutemon : lutemons) {
             if (lutemon.getId() == 3) {
@@ -90,12 +95,17 @@ public class FightFragment extends Fragment {
             }
         }
         linearLayout = view.findViewById(R.id.linearLayoutFighting);
+        int i = 0;
         for (Lutemon lutemon : lutemons_in_fight) {
             CheckBox checkBox = new CheckBox(getContext());
             checkBox.setText(lutemon.getName() + " ("+lutemon.getColor()+")");
-            checkBox.setId(lutemon.getId());
+            // Copilot helped me to add new integer and tag in checkBox to check for right Lutemon //
+            // With int i, I can create unique ids for every Lutemon //
+            checkBox.setId(i);
+            checkBox.setTag(lutemon);
             linearLayout.addView(checkBox);
             checkBoxList.add(checkBox);
+            i++;
         }
 
         return view;
@@ -104,16 +114,33 @@ public class FightFragment extends Fragment {
 
     public void toFightArea(View view) {
         System.out.println("Taisteluun");
-
-        RadioGroup radioGroup = view.findViewById(R.id.clFight);
-        int selectedLutemon = radioGroup.getCheckedRadioButtonId();
-        RadioButton radioButton = view.findViewById(selectedLutemon);
-        String name = radioButton.getText().toString();
-        for (Lutemon lutemon : storage.getLutemons()) {
-            if (name.contains(lutemon.getName())) {
-                lutemon.setId(3);
-
+        // Copilot helped me fix a bug where rgFight name was incorrectly clFight, which is constraintlayoutId, originally //
+        ArrayList<Lutemon> lutemons_to_fight = new ArrayList<>();
+        for (CheckBox checkBox : checkBoxList) {
+            if (checkBox.isChecked()) {
+                Lutemon lutemon = (Lutemon) checkBox.getTag();
+                if (!lutemons_to_fight.contains(lutemon)) {
+                    lutemons_to_fight.add(lutemon);
+                }
             }
+        }
+
+        for (Lutemon lutemon : lutemons_to_fight) {
+            Log.d(lutemon.getName()+lutemon.getId(), "Toimii");
+        }
+
+        if (lutemons_to_fight.size() == 2) {
+            for (Lutemon lutemon : lutemons_to_fight) {
+                lutemon.setId(5);
+            }
+            // Copilot helped me to save lutemons in this place so they are properly used from the file //
+            storage.saveLutemons(getContext());
+            Intent intent = new Intent(getActivity(), FightActivity.class);
+            startActivity(intent);
+        }
+        else {
+            TextView textView = new TextView(getContext());
+            textView.setText("Valitse kaksi Lutemonia niin pääset Elämäsi taisteluun!!!");
         }
 
     }

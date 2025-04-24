@@ -17,17 +17,18 @@ public class FightActivity extends AppCompatActivity {
         Storage storage = Storage.getInstance();
         ArrayList<Lutemon> lutemonsInFight = new ArrayList<>();
         for (Lutemon lutemon : storage.getLutemons()) {
-            if (lutemon.getId() == 3) {
+            if (lutemon.getId() == 5) {
                 lutemonsInFight.add(lutemon);
             }
         }
         textView = findViewById(R.id.textViewFight);
         textView.setText("Lutemonit taistelevat ja ottavat mittaa toisistaan!!!");
-        storage.listLutemonsInformation();
-        for (Lutemon lutemon : lutemonsInFight) {
-            /*textView.append("\n"+ toString(storage.listLutemonsInformation())); */
-            lutemon.attack(lutemonsInFight.get(0));
-            lutemon.defence(lutemonsInFight.get(0));
-        }
+        textView.append(storage.listLutemonsInformation()+"\n");
+        Lutemon lutemon1 = lutemonsInFight.get(0);
+        Lutemon lutemon2 = lutemonsInFight.get(1);
+        String attack = lutemon1.attack(lutemon2);
+        textView.append(attack+"\n");
+        String defence = lutemon2.defence(lutemon1);
+        textView.append(defence+"\n");
     }
 }
