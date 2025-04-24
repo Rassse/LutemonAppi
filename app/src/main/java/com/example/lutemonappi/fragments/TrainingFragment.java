@@ -118,11 +118,11 @@ public class TrainingFragment extends Fragment {
             rgLutemonWhereAbouts = view.findViewById(R.id.rgTraining);
         }
         int checkId = rgLutemonWhereAbouts.getCheckedRadioButtonId();
-        if (checkId == R.id.radioButtonHomeHome) {
+        if (checkId == R.id.radioButtonHomeTrain) {
             valueId = 1;
-        } else if (checkId == R.id.radioButtonTrainHome) {
+        } else if (checkId == R.id.radioButtonTrainTrain) {
             valueId = 2;
-        } else if (checkId == R.id.radioButtonFightHome) {
+        } else if (checkId == R.id.radioButtonFightTrain) {
             valueId = 3;
         }
         // COpilot helped me to create a new arraylist so that I can remove checkboxes and the fragment doesn't crash //

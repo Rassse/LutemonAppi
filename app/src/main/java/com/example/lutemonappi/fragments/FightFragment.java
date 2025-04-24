@@ -93,7 +93,6 @@ public class FightFragment extends Fragment {
         for (Lutemon lutemon : lutemons_in_fight) {
             CheckBox checkBox = new CheckBox(getContext());
             checkBox.setText(lutemon.getName() + " ("+lutemon.getColor()+")");
-            // COpilot showed be there is a genereateViewId() method to generate unique ids so I can access them easier //
             checkBox.setId(lutemon.getId());
             linearLayout.addView(checkBox);
             checkBoxList.add(checkBox);
