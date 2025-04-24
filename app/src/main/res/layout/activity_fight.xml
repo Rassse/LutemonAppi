@@ -9,8 +9,8 @@
 
     <TextView
         android:id="@+id/textViewFight"
-        android:layout_width="352dp"
-        android:layout_height="432dp"
+        android:layout_width="354dp"
+        android:layout_height="618dp"
         android:layout_marginStart="30dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="29dp"
@@ -18,8 +18,10 @@
         android:text="TextView"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.152" />
 
     <Button
         android:id="@+id/buttonFightToNavigator"
@@ -27,9 +29,9 @@
         android:layout_height="84dp"
         android:layout_marginStart="160dp"
         android:layout_marginEnd="161dp"
-        android:layout_marginBottom="91dp"
-        android:text="Takaisin navigaattoriin"
+        android:layout_marginBottom="16dp"
         android:onClick="switchToNavigator"
+        android:text="Takaisin navigaattoriin"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

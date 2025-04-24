@@ -26,44 +26,68 @@ public class FightActivity extends AppCompatActivity {
                 lutemonsInFight.add(lutemon);
             }
         }
+
+
         if (lutemonsInFight.size() == 2) {
             textView = findViewById(R.id.textViewFight);
             textView.setText("Lutemonit taistelevat ja ottavat mittaa toisistaan!!!" + "\n");
-            for (Lutemon lutemon : lutemonsInFight) {
-                textView.append("Lutemoni: " + lutemon.getColor() + "(" + lutemon.getName() + ")" + " hyök: " + lutemon.getAttack() + "; puol: " + lutemon.getDefense() + "; kok: " + lutemon.getExperience() + "; elämät: " + lutemon.getHealth() + "\n");
-            }
             Lutemon lutemon1 = lutemonsInFight.get(0);
             Lutemon lutemon2 = lutemonsInFight.get(1);
-            while (lutemon1.getHealth() > 0 && lutemon2.getHealth() > 0) {
-                String attack1 = lutemon1.attack(lutemon2);
-                textView.append(attack1 + "\n");
-                if (lutemon2.getHealth() <= 0) {
-                    break;
-                }
-                String defence1 = lutemon2.defence(lutemon1);
-                textView.append(defence1 + "\n");
-                String attack2 = lutemon2.attack(lutemon1);
-                textView.append(attack2 + "\n");
 
-                if (lutemon1.getHealth() <= 0) {
-                    break;
-                }
-                String defence2 = lutemon1.defence(lutemon2);
-                textView.append(defence2 + "\n");
-            }
+            // I learned here to create and run on a thread, because the app kept crashing in fightactivity //
+            // https://www.youtube.com/watch?v=kpFwxJFYnOo&list=PLfuE3hOAeWhYspjqABfkf97AzW1XNXgjZ //
+            // https://medium.com/@yossisegev/understanding-activity-runonuithread-e102d388fe93 //
+            // https://www.tutorialspoint.com/how-do-we-use-runonuithread-in-android //
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    for (Lutemon lutemon : lutemonsInFight) {
+                        lutemon.setHealth(lutemon.getMaxHealth());
+                        runOnUiThread(() -> textView.append("Lutemoni: " + lutemon.getColor() + "(" + lutemon.getName() + ")" + " hyök: " + lutemon.getAttack() + "; puol: " + lutemon.getDefense() + "; kok: " + lutemon.getExperience() + "; elämät: " + lutemon.getHealth()+"/"+lutemon.getMaxHealth() + "\n"));
+                    }
+                    while (lutemon1.getHealth() > 0 && lutemon2.getHealth() > 0) {
+                        String attack1 = lutemon1.attack(lutemon2);
+                        runOnUiThread(() -> textView.append(attack1 + "\n"));
 
-            storage.saveLutemons(this);
-            if (lutemon1.getHealth() <= 0) {
-                lutemon1.setId(4);
-                lutemon2.setId(1);
-            } else if (lutemon2.getHealth() <= 0) {
-                lutemon2.setId(4);
-                lutemon1.setId(1);
-            }
+                        if (lutemon2.getHealth() <= 0) break;
+
+                        String defence1 = lutemon2.defence(lutemon1);
+                        runOnUiThread(() -> {
+                            textView.append(defence1 + "\n");
+                            textView.append("Lutemoni: " + lutemon1.getColor() + "(" + lutemon1.getName() + ")" + " hyök: " + lutemon1.getAttack() + "; puol: " + lutemon1.getDefense() + "; kok: " + lutemon1.getExperience() + "; elämät: " + lutemon1.getHealth()+"/"+lutemon1.getMaxHealth() + "\n");
+                            textView.append("Lutemoni: " + lutemon2.getColor() + "(" + lutemon2.getName() + ")" + " hyök: " + lutemon2.getAttack() + "; puol: " + lutemon2.getDefense() + "; kok: " + lutemon2.getExperience() + "; elämät: " + lutemon2.getHealth()+"/"+lutemon2.getMaxHealth() + "\n");
+                        });
+
+
+                        String attack2 = lutemon2.attack(lutemon1);
+                        runOnUiThread(() -> textView.append(attack2 + "\n"));
+
+                        if (lutemon1.getHealth() <= 0) break;
+
+                        String defence2 = lutemon1.defence(lutemon2);
+                        runOnUiThread(() -> {
+                            textView.append(defence2 + "\n");
+                            textView.append("Lutemoni: " + lutemon1.getColor() + "(" + lutemon1.getName() + ")" + " hyök: " + lutemon1.getAttack() + "; puol: " + lutemon1.getDefense() + "; kok: " + lutemon1.getExperience() + "; elämät: " + lutemon1.getHealth()+"/"+lutemon1.getMaxHealth() + "\n");
+                            textView.append("Lutemoni: " + lutemon2.getColor() + "(" + lutemon2.getName() + ")" + " hyök: " + lutemon2.getAttack() + "; puol: " + lutemon2.getDefense() + "; kok: " + lutemon2.getExperience() + "; elämät: " + lutemon2.getHealth()+"/"+lutemon2.getMaxHealth() + "\n");
+                        });
+
+                    }
+
+                    runOnUiThread(() -> {
+                        if (lutemon1.getHealth() <= 0) {
+                            lutemon1.setId(4);
+                            lutemon2.setId(1);
+                        } else if (lutemon2.getHealth() <= 0) {
+                            lutemon2.setId(4);
+                            lutemon1.setId(1);
+                        }
+                        storage.saveLutemons(FightActivity.this);
+                    });
+                }
+            }).start();
 
         }
     }
-
         public void switchToNavigator (View view) {
             Storage storage = Storage.getInstance();
             // Copilot suggested to me to clear the list after fight //
@@ -76,6 +100,10 @@ public class FightActivity extends AppCompatActivity {
             }
             storage.saveLutemons(this);
             lutemonsInFight.clear();
+
+            if (textView != null) {
+                textView.setText("");
+            }
 
             Intent intent = new Intent(this, ActivityNavigator.class);
             startActivity(intent);
