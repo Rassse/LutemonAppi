@@ -13,6 +13,9 @@ public class Lutemon implements Serializable {
         this.id = 1;
         this.experience = 0;
         this.maxHealth = 0;
+        this.losses = 0;
+        this.image = R.drawable.black;
+
 
         // DeepSeek helped me to ideate method to get the default values for colors //
         switch (color) {
@@ -20,26 +23,31 @@ public class Lutemon implements Serializable {
                 this.attack = 5;
                 this.defense = 4;
                 this.maxHealth = 20;
+                this.image = R.drawable.white;
                 break;
             case "Vihreä":
                 this.attack = 6;
                 this.defense = 3;
                 this.maxHealth = 19;
+                this.image = R.drawable.green;
                 break;
             case "Pinkki":
                 this.attack = 7;
                 this.defense = 2;
                 this.maxHealth = 18;
+                this.image = R.drawable.pink;
                 break;
             case "Oranssi":
                 this.attack = 8;
                 this.defense = 1;
                 this.maxHealth = 17;
+                this.image = R.drawable.orange;
                 break;
             case "Musta":
                 this.attack = 9;
                 this.defense = 0;
                 this.maxHealth = 16;
+                this.image = R.drawable.black;
                 break;
 
         }
@@ -138,24 +146,20 @@ public class Lutemon implements Serializable {
         return idCounter;
     }
     public String defence(Lutemon lutemon) {
-        int damage = this.defense - lutemon.getAttack();
-        // Copilot helped me to check if damage is negative //
-        if (damage < 0) {
-            damage = 0;
-        }
-        this.health = Math.max(this.health-damage, 0);
-        String fight = this.color+"("+this.name+")"+" puolustautuu Lutemonia "+ "("+lutemon.getColor() + ")" +"vastaan.";
+        // COpilot helped me to debug this logic, I had the lutemon.get... and this.defen.. in incorrect order //
+        int damage = this.defense - lutemon.getDefense();
+        damage = Math.max(damage, 0);
+        this.health = Math.max(this.health -damage, 0);
+        String fight = this.color+"("+this.name+")"+" puolustautuu!";
 
         return fight;
     }
     public String attack(Lutemon lutemon) {
         int damage = this.attack - lutemon.getDefense();
-        if (damage < 0) {
-            damage = 0;
-        }
+        damage = Math.max(damage, 0);
         lutemon.setHealth(Math.max(lutemon.getHealth()-damage, 0));
         this.experience += 1;
-        String fight = this.color+"("+this.name+")"+" hyökkää Lutemonia "+ "("+lutemon.getColor() + ")" +"vastaan.";
+        String fight = this.color+"("+this.name+")"+" hyökkää Lutemonia "+ lutemon.getColor()+"("+lutemon.getName() + ")" +"vastaan.";
 
         if (lutemon.getHealth() == 0) {
             fight += "\n"+lutemon.getName() + " kuoli! Lepää Rauhassa.";
@@ -163,6 +167,26 @@ public class Lutemon implements Serializable {
         }
         return fight;
     }
+
+
+    public int getLosses() {
+        return losses;
+    }
+
+    public void setLosses(int losses) {
+        this.losses = losses;
+    }
+
+    public int getImage() {
+        return image;
+    }
+
+    public void setImage(int image) {
+        this.image = image;
+    }
+
+    protected int image;
+    protected int losses;
 
     protected String name;
     protected String color;

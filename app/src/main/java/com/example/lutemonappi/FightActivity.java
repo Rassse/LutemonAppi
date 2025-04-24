@@ -47,7 +47,14 @@ public class FightActivity extends AppCompatActivity {
                     }
                     while (lutemon1.getHealth() > 0 && lutemon2.getHealth() > 0) {
                         String attack1 = lutemon1.attack(lutemon2);
-                        runOnUiThread(() -> textView.append(attack1 + "\n"));
+                        // Copilot helped me to debug the logic, I had to append to textView in all of the attacks and defences //
+                        // Before it was only after defences //
+                        runOnUiThread(() -> {
+                            textView.append(attack1 + "\n");
+                            textView.append("Lutemoni: " + lutemon1.getColor() + "(" + lutemon1.getName() + ")" + " hyök: " + lutemon1.getAttack() + "; puol: " + lutemon1.getDefense() + "; kok: " + lutemon1.getExperience() + "; elämät: " + lutemon1.getHealth()+"/"+lutemon1.getMaxHealth() + "\n");
+                            textView.append("Lutemoni: " + lutemon2.getColor() + "(" + lutemon2.getName() + ")" + " hyök: " + lutemon2.getAttack() + "; puol: " + lutemon2.getDefense() + "; kok: " + lutemon2.getExperience() + "; elämät: " + lutemon2.getHealth()+"/"+lutemon2.getMaxHealth() + "\n");
+                        });
+
 
                         if (lutemon2.getHealth() <= 0) break;
 
@@ -60,7 +67,12 @@ public class FightActivity extends AppCompatActivity {
 
 
                         String attack2 = lutemon2.attack(lutemon1);
-                        runOnUiThread(() -> textView.append(attack2 + "\n"));
+                        runOnUiThread(() -> {
+                            textView.append(attack2 + "\n");
+                            textView.append("Lutemoni: " + lutemon1.getColor() + "(" + lutemon1.getName() + ")" + " hyök: " + lutemon1.getAttack() + "; puol: " + lutemon1.getDefense() + "; kok: " + lutemon1.getExperience() + "; elämät: " + lutemon1.getHealth()+"/"+lutemon1.getMaxHealth() + "\n");
+                            textView.append("Lutemoni: " + lutemon2.getColor() + "(" + lutemon2.getName() + ")" + " hyök: " + lutemon2.getAttack() + "; puol: " + lutemon2.getDefense() + "; kok: " + lutemon2.getExperience() + "; elämät: " + lutemon2.getHealth()+"/"+lutemon2.getMaxHealth() + "\n");
+                        });
+
 
                         if (lutemon1.getHealth() <= 0) break;
 
@@ -70,7 +82,6 @@ public class FightActivity extends AppCompatActivity {
                             textView.append("Lutemoni: " + lutemon1.getColor() + "(" + lutemon1.getName() + ")" + " hyök: " + lutemon1.getAttack() + "; puol: " + lutemon1.getDefense() + "; kok: " + lutemon1.getExperience() + "; elämät: " + lutemon1.getHealth()+"/"+lutemon1.getMaxHealth() + "\n");
                             textView.append("Lutemoni: " + lutemon2.getColor() + "(" + lutemon2.getName() + ")" + " hyök: " + lutemon2.getAttack() + "; puol: " + lutemon2.getDefense() + "; kok: " + lutemon2.getExperience() + "; elämät: " + lutemon2.getHealth()+"/"+lutemon2.getMaxHealth() + "\n");
                         });
-
                     }
 
                     runOnUiThread(() -> {

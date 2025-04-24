@@ -10,8 +10,8 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="100dp"
         tools:srcCompat="@tools:sample/avatars" />
 
     <LinearLayout
@@ -25,7 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Nimi"
-            android:textSize="22sp"
+            android:textSize="19sp"
             android:textStyle="bold" />
 
         <TextView
@@ -33,28 +33,35 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Hyökkäys"
-            android:textSize="17sp" />
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/textViewDefence"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Puolustus"
-            android:textSize="17sp" />
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/textViewHealth"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Elämät"
-            android:textSize="17sp" />
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/textViewExperience"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Kokemus"
-            android:textSize="17sp" />
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/textViewLosses"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Häviöt"
+            android:textSize="14sp" />
     </LinearLayout>
 
 </androidx.appcompat.widget.LinearLayoutCompat>

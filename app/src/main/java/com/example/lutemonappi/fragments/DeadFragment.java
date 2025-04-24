@@ -109,7 +109,6 @@ public class DeadFragment extends Fragment {
             }
         }
 
-
         return view;
     }
 
