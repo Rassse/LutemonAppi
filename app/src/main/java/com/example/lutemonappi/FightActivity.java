@@ -113,6 +113,7 @@ public class FightActivity extends AppCompatActivity {
             lutemonsInFight.clear();
 
             if (textView != null) {
+                // I was going to write textView.clearComposingText() but Copilot suggested setText("") //
                 textView.setText("");
             }
 
