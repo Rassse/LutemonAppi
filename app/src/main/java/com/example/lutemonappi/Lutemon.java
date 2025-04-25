@@ -14,6 +14,8 @@ public class Lutemon implements Serializable {
         this.experience = 0;
         this.maxHealth = 0;
         this.losses = 0;
+        // I used this website to get drawables //
+        // https://opengameart.org/content/spiky-monster-obstacle //
         this.image = R.drawable.black;
 
 
@@ -68,7 +70,7 @@ public class Lutemon implements Serializable {
         this.name = name;
     }
     public boolean aliveOrDead() {
-        if (health == 0) {
+        if (health <= 0) {
             return false;
         }
         else {
@@ -146,22 +148,37 @@ public class Lutemon implements Serializable {
         return idCounter;
     }
     public String defence(Lutemon lutemon) {
-        // COpilot helped me to debug this logic, I had the lutemon.get... and this.defen.. in incorrect order //
-        int damage = this.defense - lutemon.getDefense();
-        damage = Math.max(damage, 0);
-        this.health = Math.max(this.health -damage, 0);
-        String fight = this.color+"("+this.name+")"+" puolustautuu!";
 
+        // ChatGPT also helpede me to also test aliveOrDead twice in order to get the right outputs //
+        // dead lutemon should not attack anymore as it did before //
+        if (!aliveOrDead()) {
+            return this.name+" kuoli! Lepää Rauhassa.";
+        }
+        // Also ChatGPT helped me to understand that I have to avoid negative numbers //
+        // which came up when I ran the code //
+        // I avoided them by using MAth.max //
+        // COpilot helped me to debug this logic, I had the lutemon.get... and this.defen.. in incorrect order //
+        int damage = Math.max(lutemon.getAttack()- this.defense, 0);
+        this.setHealth(Math.max(0, this.getHealth()-damage));
+        String fight = this.color+"("+this.name+")"+" puolustautuu!";
+        if (!aliveOrDead()) {
+            fight += "\n"+this.name+" kuoli! Lepää Rauhassa.";
+            Storage.getInstance().removeLutemon(this.getId());
+        }
         return fight;
     }
     public String attack(Lutemon lutemon) {
-        int damage = this.attack - lutemon.getDefense();
-        damage = Math.max(damage, 0);
-        lutemon.setHealth(Math.max(lutemon.getHealth()-damage, 0));
+        // ChatGPT also helpede me to also test aliveOrDead twice in order to get the right outputs //
+        // dead lutemon should not attack anymore as it did before //
+        if (!this.aliveOrDead()) {
+            return "\n"+this.name+" kuoli! Lepää Rauhassa.";
+        }
+        int damage = Math.max(this.attack - lutemon.getDefense(), 0);
+        lutemon.setHealth(Math.max(0, lutemon.getHealth()-damage));
         this.experience += 1;
-        String fight = this.color+"("+this.name+")"+" hyökkää Lutemonia "+ lutemon.getColor()+"("+lutemon.getName() + ")" +"vastaan.";
+        String fight = this.color+"("+this.name+")"+" hyökkää Lutemonia "+ lutemon.getColor()+"("+lutemon.getName() + ")" +" kohti.";
 
-        if (lutemon.getHealth() == 0) {
+        if (lutemon.getHealth() <= 0) {
             fight += "\n"+lutemon.getName() + " kuoli! Lepää Rauhassa.";
             Storage.getInstance().removeLutemon(lutemon.getId());
         }

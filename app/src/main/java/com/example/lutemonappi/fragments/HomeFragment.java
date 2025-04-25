@@ -17,6 +17,7 @@ import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 
+import com.example.lutemonappi.ActivityNavigator;
 import com.example.lutemonappi.FightActivity;
 import com.example.lutemonappi.Lutemon;
 import com.example.lutemonappi.R;
@@ -100,6 +101,10 @@ public class HomeFragment extends Fragment {
         Button moveButtonsHome = view.findViewById(R.id.moveButtonsHome);
         moveButtonsHome.setOnClickListener((View v) -> {
             moveLutemons(v);
+        });
+        Button moveNaviHome = view.findViewById(R.id.buttonNaviHome);
+        moveNaviHome.setOnClickListener((View v) -> {
+            moveNavi(v);
         });
         ArrayList<Lutemon> lutemons_here = new ArrayList<>();
         linearLayoutCheckBox = view.findViewById(R.id.linearLayoutCheckBox);
@@ -196,5 +201,10 @@ public class HomeFragment extends Fragment {
         }
 
 
+    }
+
+    public void moveNavi(View view) {
+        Intent intent = new Intent(getActivity(), ActivityNavigator.class);
+        startActivity(intent);
     }
 }

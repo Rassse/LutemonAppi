@@ -15,6 +15,7 @@ import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 
+import com.example.lutemonappi.ActivityNavigator;
 import com.example.lutemonappi.Lutemon;
 import com.example.lutemonappi.R;
 import com.example.lutemonappi.RestLutemons;
@@ -89,6 +90,10 @@ public class TrainingFragment extends Fragment {
         Button moveButtonsTrain = view.findViewById(R.id.moveButtonsTrain);
         moveButtonsTrain.setOnClickListener((View v) -> {
             moveLutemons(v);
+        });
+        Button buttonNaviTrains = view.findViewById(R.id.buttonNaviTrain);
+        buttonNaviTrains.setOnClickListener((View v) -> {
+            moveNavi(v);
         });
         rgLutemonWhereAbouts = view.findViewById(R.id.rgTraining);
         // Copilot helped me to check Id through iteration rather than long if else clauses //
@@ -191,6 +196,11 @@ public class TrainingFragment extends Fragment {
         }
 
 
+    }
+
+    public void moveNavi(View view) {
+        Intent intent = new Intent(getActivity(), ActivityNavigator.class);
+        startActivity(intent);
     }
 
 

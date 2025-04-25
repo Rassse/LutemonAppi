@@ -10,14 +10,15 @@
 
     <LinearLayout
         android:id="@+id/linearLayoutFighting"
-        android:layout_width="411dp"
-        android:layout_height="471dp"
+        android:layout_width="397dp"
+        android:layout_height="538dp"
         android:layout_marginStart="4dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="76dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"></LinearLayout>
+        app:layout_constraintTop_toTopOf="parent"></LinearLayout>
 
     <Button
         android:id="@+id/buttonToFight"
@@ -25,11 +26,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="160dp"
         android:layout_marginEnd="161dp"
-        android:layout_marginBottom="84dp"
+        android:layout_marginBottom="32dp"
         android:text="Taisteluun"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.96"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -37,10 +38,12 @@
         android:layout_width="216dp"
         android:layout_height="52dp"
         android:layout_marginStart="78dp"
-        android:layout_marginTop="54dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="117dp"
         android:text="Valitse kaksi taistelijaa! Valmistaudu elämäsi taisteluun!!!"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

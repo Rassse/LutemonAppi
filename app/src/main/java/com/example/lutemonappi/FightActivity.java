@@ -27,7 +27,6 @@ public class FightActivity extends AppCompatActivity {
             }
         }
 
-
         if (lutemonsInFight.size() == 2) {
             textView = findViewById(R.id.textViewFight);
             textView.setText("Lutemonit taistelevat ja ottavat mittaa toisistaan!!!" + "\n");
@@ -45,7 +44,20 @@ public class FightActivity extends AppCompatActivity {
                         lutemon.setHealth(lutemon.getMaxHealth());
                         runOnUiThread(() -> textView.append("Lutemoni: " + lutemon.getColor() + "(" + lutemon.getName() + ")" + " hyök: " + lutemon.getAttack() + "; puol: " + lutemon.getDefense() + "; kok: " + lutemon.getExperience() + "; elämät: " + lutemon.getHealth()+"/"+lutemon.getMaxHealth() + "\n"));
                     }
+                    // ChatGPT helped me fix a bug where the whole fight was printed at once //
+                    // The health's were not printed correctly //
+                    // Using Thread.sleep solved the problem by creating 2 second delay between attacks//
+                    try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
                     while (lutemon1.getHealth() > 0 && lutemon2.getHealth() > 0) {
+                        // ChatGPT suggested me to check if Lutemons are alive before they attack //
+                        // In my code they were attacking when they were already dead //
+                        if (!lutemon1.aliveOrDead() || !lutemon2.aliveOrDead()) {
+                            break;
+                        }
                         String attack1 = lutemon1.attack(lutemon2);
                         // Copilot helped me to debug the logic, I had to append to textView in all of the attacks and defences //
                         // Before it was only after defences //
@@ -54,7 +66,6 @@ public class FightActivity extends AppCompatActivity {
                             textView.append("Lutemoni: " + lutemon1.getColor() + "(" + lutemon1.getName() + ")" + " hyök: " + lutemon1.getAttack() + "; puol: " + lutemon1.getDefense() + "; kok: " + lutemon1.getExperience() + "; elämät: " + lutemon1.getHealth()+"/"+lutemon1.getMaxHealth() + "\n");
                             textView.append("Lutemoni: " + lutemon2.getColor() + "(" + lutemon2.getName() + ")" + " hyök: " + lutemon2.getAttack() + "; puol: " + lutemon2.getDefense() + "; kok: " + lutemon2.getExperience() + "; elämät: " + lutemon2.getHealth()+"/"+lutemon2.getMaxHealth() + "\n");
                         });
-
 
                         if (lutemon2.getHealth() <= 0) break;
 
@@ -65,6 +76,11 @@ public class FightActivity extends AppCompatActivity {
                             textView.append("Lutemoni: " + lutemon2.getColor() + "(" + lutemon2.getName() + ")" + " hyök: " + lutemon2.getAttack() + "; puol: " + lutemon2.getDefense() + "; kok: " + lutemon2.getExperience() + "; elämät: " + lutemon2.getHealth()+"/"+lutemon2.getMaxHealth() + "\n");
                         });
 
+                        try {
+                            Thread.sleep(2000);
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
 
                         String attack2 = lutemon2.attack(lutemon1);
                         runOnUiThread(() -> {
@@ -82,6 +98,11 @@ public class FightActivity extends AppCompatActivity {
                             textView.append("Lutemoni: " + lutemon1.getColor() + "(" + lutemon1.getName() + ")" + " hyök: " + lutemon1.getAttack() + "; puol: " + lutemon1.getDefense() + "; kok: " + lutemon1.getExperience() + "; elämät: " + lutemon1.getHealth()+"/"+lutemon1.getMaxHealth() + "\n");
                             textView.append("Lutemoni: " + lutemon2.getColor() + "(" + lutemon2.getName() + ")" + " hyök: " + lutemon2.getAttack() + "; puol: " + lutemon2.getDefense() + "; kok: " + lutemon2.getExperience() + "; elämät: " + lutemon2.getHealth()+"/"+lutemon2.getMaxHealth() + "\n");
                         });
+                    }
+                    try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
                     }
 
                     runOnUiThread(() -> {
@@ -107,6 +128,7 @@ public class FightActivity extends AppCompatActivity {
                     lutemon.setId(4);
                 } else {
                     lutemon.setId(1);
+                    lutemon.setHealth(lutemon.getMaxHealth());
                 }
             }
             storage.saveLutemons(this);
@@ -124,5 +146,10 @@ public class FightActivity extends AppCompatActivity {
         @Override
         public void onResume () {
             super.onResume();
+        }
+
+        public void fightContinues(View view) {
+            Intent intent = new Intent(this, ActivityNavigator.class);
+            startActivity(intent);
         }
     }

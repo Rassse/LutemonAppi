@@ -10,21 +10,23 @@
 
     <LinearLayout
         android:id="@+id/linearLayoutCheckBox"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="398dp"
+        android:layout_height="394dp"
+        android:layout_margin="16dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.68"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_margin="16dp"></LinearLayout>
+        app:layout_constraintVertical_bias="0.0" />
 
     <RadioGroup
         android:id="@+id/rgLutemonHome"
         android:layout_width="149dp"
         android:layout_height="140dp"
         android:layout_marginStart="154dp"
-        android:layout_marginTop="350dp"
+        android:layout_marginTop="250dp"
         android:layout_marginEnd="137dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -54,12 +56,22 @@
         android:id="@+id/moveButtonsHome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="28dp"
+        android:layout_marginBottom="70dp"
         android:text="Siirrä valitut Lutemonit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:toggleCheckedStateOnClick="true" />
+
+    <Button
+        android:id="@+id/buttonNaviHome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="Siirry valikkoon"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

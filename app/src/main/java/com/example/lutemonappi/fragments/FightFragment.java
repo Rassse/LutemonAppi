@@ -142,10 +142,13 @@ public class FightFragment extends Fragment {
             Intent intent = new Intent(getActivity(), FightActivity.class);
             startActivity(intent);
         }
+        /*
         else {
-            TextView textView = new TextView(getContext());
+            TextView textView = view.findViewById(R.id.textViewFightlol);
             textView.setText("Valitse kaksi Lutemonia niin pääset Elämäsi taisteluun!!!");
         }
+        */
+
 
     }
     // https://stackoverflow.com/questions/11326155/fragment-onresume-onpause-is-not-called-on-backstack //

@@ -1,5 +1,6 @@
 package com.example.lutemonappi.fragments;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 
@@ -8,10 +9,12 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.lutemonappi.ActivityNavigator;
 import com.example.lutemonappi.Lutemon;
 import com.example.lutemonappi.R;
 import com.example.lutemonappi.Storage;
@@ -81,6 +84,10 @@ public class DeadFragment extends Fragment {
 
         storage = Storage.getInstance();
         lutemons = storage.getLutemons();
+        Button resetLutemons = view.findViewById(R.id.buttonDeadRevive);
+        resetLutemons.setOnClickListener((View v) -> {
+            resetLutemon(v);
+        });
 
         ArrayList<Lutemon> lutemons_here = new ArrayList<>();
         linearLayoutCheckBox = view.findViewById(R.id.linearLayoutDead);
@@ -117,4 +124,43 @@ public class DeadFragment extends Fragment {
     public void onResume() {
         super.onResume();
     }
+
+    public void resetLutemon(View view) {
+        // COpilot helped me to create a new arraylist so that I can remove checkboxes and the fragment doesn't crash //
+        ArrayList<CheckBox> removeCheckBoxes = new ArrayList<>();
+        ArrayList<Lutemon> moveLutemons = new ArrayList<>();
+        int losses = 1;
+        for (CheckBox checkBox : checkBoxList) {
+            if (checkBox.isChecked()) {
+                for (Lutemon lutemon : storage.getLutemons()) {
+                    if (checkBox.getText().toString().contains(lutemon.getName())) {
+                        lutemon.setId(1);
+                        lutemon.setLosses(losses);
+                        lutemon.setHealth(lutemon.getMaxHealth());
+                        moveLutemons.add(lutemon);
+                        removeCheckBoxes.add(checkBox);
+                        losses++;
+                    }
+                }
+            }
+        }
+        if (linearLayoutCheckBox == null) {
+            linearLayoutCheckBox = view.findViewById(R.id.linearLayoutTrain);
+        }
+        // Copilot helped me to fix the bug where checkboxes didn't get removed and the fragment crashed //
+        // I checked if the LinearLayout is not null before removing checkboxes //
+        if (linearLayoutCheckBox != null) {
+            for (CheckBox checkBox : removeCheckBoxes) {
+                linearLayoutCheckBox.removeView(checkBox);
+                checkBoxList.remove(checkBox);
+            }
+
+        }
+        storage.saveLutemons(getContext());
+
+        Intent intent = new Intent(getActivity(), ActivityNavigator.class);
+        startActivity(intent);
+
+    }
+
 }
