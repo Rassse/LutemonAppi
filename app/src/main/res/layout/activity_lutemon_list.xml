@@ -9,8 +9,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvLutemonList"
-        android:layout_width="409dp"
-        android:layout_height="729dp"
+        android:layout_width="429dp"
+        android:layout_height="693dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
