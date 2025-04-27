@@ -63,8 +63,6 @@ public class FightActivity extends AppCompatActivity {
                             break;
                         }
                         String attack1 = lutemon1.attack(lutemon2);
-                        // Copilot helped me to debug the logic, I had to append to textView in all of the attacks and defences //
-                        // Before it was only after defences //
                         runOnUiThread(() -> {
                             textView.append(attack1 + "\n");
                             /*textView.append("Lutemoni: " + lutemon1.getColor() + "(" + lutemon1.getName() + ")" + " hyök: " + lutemon1.getAttack() + "; puol: " + lutemon1.getDefense() + "; kok: " + lutemon1.getExperience() + "; elämät: " + lutemon1.getHealth()+"/"+lutemon1.getMaxHealth() + "\n");

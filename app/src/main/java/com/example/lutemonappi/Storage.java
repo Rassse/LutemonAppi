@@ -70,6 +70,7 @@ public class Storage {
 
     public String listLutemonsInformation() {
         // Copilot helped me to idealize using order variable for the number of monster //
+        // I had ideas of using this method but I used different ways of printing specs in the app //
         String info = "";
         for (Lutemon lutemon : lutemons) {
             info += lutemon.printSpecs()+"\n";
