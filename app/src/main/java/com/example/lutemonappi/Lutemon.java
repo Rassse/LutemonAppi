@@ -166,6 +166,9 @@ public class Lutemon implements Serializable {
         return fight;
     }
     public String attack(Lutemon lutemon) {
+        if (this.health <= 0) {
+            return "Taistelu päättyi!";
+        }
         int damage = Math.max(this.attack - lutemon.getDefense(), 0);
         lutemon.setHealth(Math.max(0, lutemon.getHealth()-damage));
         String fight = this.color+"("+this.name+")"+" hyökkää Lutemonia "+ lutemon.getColor()+"("+lutemon.getName() + ")" +" kohti.";

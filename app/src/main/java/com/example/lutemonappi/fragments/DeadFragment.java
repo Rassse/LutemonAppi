@@ -129,17 +129,15 @@ public class DeadFragment extends Fragment {
         // COpilot helped me to create a new arraylist so that I can remove checkboxes and the fragment doesn't crash //
         ArrayList<CheckBox> removeCheckBoxes = new ArrayList<>();
         ArrayList<Lutemon> moveLutemons = new ArrayList<>();
-        int losses = 1;
         for (CheckBox checkBox : checkBoxList) {
             if (checkBox.isChecked()) {
                 for (Lutemon lutemon : storage.getLutemons()) {
                     if (checkBox.getText().toString().contains(lutemon.getName())) {
                         lutemon.setId(1);
-                        lutemon.setLosses(losses);
+                        lutemon.setLosses(lutemon.getLosses()+1);
                         lutemon.setHealth(lutemon.getMaxHealth());
                         moveLutemons.add(lutemon);
                         removeCheckBoxes.add(checkBox);
-                        losses++;
                     }
                 }
             }
