@@ -90,10 +90,6 @@ public class Lutemon implements Serializable {
         return attack;
     }
 
-    public String printSpecs() {
-        String specs = name + " : " + color + ", " + health;
-        return specs;
-    }
 
     public void setAttack(int attack) {
         this.attack = attack;
