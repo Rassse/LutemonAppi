@@ -148,15 +148,9 @@ public class Lutemon implements Serializable {
         return idCounter;
     }
     public String defence(Lutemon lutemon) {
-        // ChatGPT helped me to understand that I have to avoid negative numbers //
-        // which came up when I ran the code //
-        // I avoided them by using MAth.max //
-        // COpilot helped me to debug this logic, I had the lutemon.get... and this.defen.. in incorrect order //
-        int damage = Math.max(lutemon.getAttack()- this.defense, 0);
-        this.setHealth(Math.max(0, this.getHealth()-damage));
         String fight = this.color+"("+this.name+")"+" puolustautuu!";
         if (!this.aliveOrDead()) {
-            fight += "\n"+this.name+" kuoli! Lepää Rauhassa.";
+            fight += "\n"+this.name+" kuoli! Lepää Rauhassa..";
             // Copilot helped me fix a bug where a Lutemon was removed from the storage after a fight //
             // I only setId(4), not remove it //
             this.setId(4);
@@ -167,7 +161,13 @@ public class Lutemon implements Serializable {
         if (this.health <= 0) {
             return "Taistelu päättyi!";
         }
-        int damage = Math.max(this.attack - lutemon.getDefense(), 0);
+        // ChatGPT helped me to understand that I have to avoid negative numbers //
+        // which came up when I ran the code //
+        // I avoided them by using MAth.max //
+        // COpilot helped me to debug this logic, I had the lutemon.get... and this.defen.. in incorrect order //
+        // Copilot helped me to fix a bug where the damage was lower than health and it killed a Lutemon //
+        // with min and max methods an not doing the same operations on defence method //
+        int damage = Math.min(Math.max(this.attack - lutemon.getDefense(), 0), lutemon.getHealth());
         lutemon.setHealth(Math.max(0, lutemon.getHealth()-damage));
         String fight = this.color+"("+this.name+")"+" hyökkää Lutemonia "+ lutemon.getColor()+"("+lutemon.getName() + ")" +" kohti.";
         if (!lutemon.aliveOrDead()) {
