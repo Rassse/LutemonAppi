@@ -155,12 +155,10 @@ public class Lutemon implements Serializable {
         int damage = Math.max(lutemon.getAttack()- this.defense, 0);
         this.setHealth(Math.max(0, this.getHealth()-damage));
         String fight = this.color+"("+this.name+")"+" puolustautuu!";
-
-
         if (!this.aliveOrDead()) {
             fight += "\n"+this.name+" kuoli! Lepää Rauhassa.";
             // Copilot helped me fix a bug where a Lutemon was removed from the storage after a fight //
-            // I only setId(4) //
+            // I only setId(4), not remove it //
             this.setId(4);
         }
         return fight;

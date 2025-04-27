@@ -13,15 +13,18 @@
         android:layout_height="532dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
+        <!-- This helped me show the last line of the textview element, adding some padding fixed the issue -->
+        <!-- https://www.reddit.com/r/reactnative/comments/tpm1vz/scrollview_is_not_working_as_expected_bottom/ -->
         <TextView
             android:id="@+id/textViewFight"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:layout_marginTop="30dp"
-            android:layout_marginEnd="29dp"
-            android:textSize="18sp" />
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="20dp"
+            android:paddingBottom="10dp"
+            android:textSize="18sp"/>
     </ScrollView>
 
 

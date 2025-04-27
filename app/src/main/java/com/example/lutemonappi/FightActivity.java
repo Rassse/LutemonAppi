@@ -67,8 +67,9 @@ public class FightActivity extends AppCompatActivity {
                         // Before it was only after defences //
                         runOnUiThread(() -> {
                             textView.append(attack1 + "\n");
-                            textView.append("Lutemoni: " + lutemon1.getColor() + "(" + lutemon1.getName() + ")" + " hyök: " + lutemon1.getAttack() + "; puol: " + lutemon1.getDefense() + "; kok: " + lutemon1.getExperience() + "; elämät: " + lutemon1.getHealth()+"/"+lutemon1.getMaxHealth() + "\n");
+                            /*textView.append("Lutemoni: " + lutemon1.getColor() + "(" + lutemon1.getName() + ")" + " hyök: " + lutemon1.getAttack() + "; puol: " + lutemon1.getDefense() + "; kok: " + lutemon1.getExperience() + "; elämät: " + lutemon1.getHealth()+"/"+lutemon1.getMaxHealth() + "\n");
                             textView.append("Lutemoni: " + lutemon2.getColor() + "(" + lutemon2.getName() + ")" + " hyök: " + lutemon2.getAttack() + "; puol: " + lutemon2.getDefense() + "; kok: " + lutemon2.getExperience() + "; elämät: " + lutemon2.getHealth()+"/"+lutemon2.getMaxHealth() + "\n");
+                            */
                         });
                         if (lutemon1.getHealth() <= 0) break;
                         if (lutemon2.getHealth() <= 0) break;
@@ -88,13 +89,17 @@ public class FightActivity extends AppCompatActivity {
                             throw new RuntimeException(e);
                         }
 
+                        if (!lutemon1.aliveOrDead() || !lutemon2.aliveOrDead()) {
+                            break;
+                        }
                         String attack2 = lutemon2.attack(lutemon1);
                         runOnUiThread(() -> {
                             textView.append(attack2 + "\n");
-                            textView.append("Lutemoni: " + lutemon1.getColor() + "(" + lutemon1.getName() + ")" + " hyök: " + lutemon1.getAttack() + "; puol: " + lutemon1.getDefense() + "; kok: " + lutemon1.getExperience() + "; elämät: " + lutemon1.getHealth()+"/"+lutemon1.getMaxHealth() + "\n");
+                            /*textView.append("Lutemoni: " + lutemon1.getColor() + "(" + lutemon1.getName() + ")" + " hyök: " + lutemon1.getAttack() + "; puol: " + lutemon1.getDefense() + "; kok: " + lutemon1.getExperience() + "; elämät: " + lutemon1.getHealth()+"/"+lutemon1.getMaxHealth() + "\n");
                             textView.append("Lutemoni: " + lutemon2.getColor() + "(" + lutemon2.getName() + ")" + " hyök: " + lutemon2.getAttack() + "; puol: " + lutemon2.getDefense() + "; kok: " + lutemon2.getExperience() + "; elämät: " + lutemon2.getHealth()+"/"+lutemon2.getMaxHealth() + "\n");
-                        });
 
+                            */
+                        });
 
                         if (lutemon1.getHealth() <= 0) break;
                         if (lutemon2.getHealth()<= 0) break;
