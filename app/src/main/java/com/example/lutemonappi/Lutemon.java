@@ -148,39 +148,30 @@ public class Lutemon implements Serializable {
         return idCounter;
     }
     public String defence(Lutemon lutemon) {
-
-        // ChatGPT also helpede me to also test aliveOrDead twice in order to get the right outputs //
-        // dead lutemon should not attack anymore as it did before //
-        if (!aliveOrDead()) {
-            return this.name+" kuoli! Lepää Rauhassa.";
-        }
-        // Also ChatGPT helped me to understand that I have to avoid negative numbers //
+        // ChatGPT helped me to understand that I have to avoid negative numbers //
         // which came up when I ran the code //
         // I avoided them by using MAth.max //
         // COpilot helped me to debug this logic, I had the lutemon.get... and this.defen.. in incorrect order //
         int damage = Math.max(lutemon.getAttack()- this.defense, 0);
         this.setHealth(Math.max(0, this.getHealth()-damage));
         String fight = this.color+"("+this.name+")"+" puolustautuu!";
-        if (!aliveOrDead()) {
+
+
+        if (!this.aliveOrDead()) {
             fight += "\n"+this.name+" kuoli! Lepää Rauhassa.";
-            Storage.getInstance().removeLutemon(this.getId());
+            // Copilot helped me fix a bug where a Lutemon was removed from the storage after a fight //
+            // I only setId(4) //
+            this.setId(4);
         }
         return fight;
     }
     public String attack(Lutemon lutemon) {
-        // ChatGPT also helpede me to also test aliveOrDead twice in order to get the right outputs //
-        // dead lutemon should not attack anymore as it did before //
-        if (!this.aliveOrDead()) {
-            return "\n"+this.name+" kuoli! Lepää Rauhassa.";
-        }
         int damage = Math.max(this.attack - lutemon.getDefense(), 0);
         lutemon.setHealth(Math.max(0, lutemon.getHealth()-damage));
-        this.experience += 1;
         String fight = this.color+"("+this.name+")"+" hyökkää Lutemonia "+ lutemon.getColor()+"("+lutemon.getName() + ")" +" kohti.";
-
-        if (lutemon.getHealth() <= 0) {
+        if (!lutemon.aliveOrDead()) {
             fight += "\n"+lutemon.getName() + " kuoli! Lepää Rauhassa.";
-            Storage.getInstance().removeLutemon(lutemon.getId());
+            lutemon.setId(4);
         }
         return fight;
     }

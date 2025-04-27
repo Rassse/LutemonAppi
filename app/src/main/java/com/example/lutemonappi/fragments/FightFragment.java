@@ -122,18 +122,12 @@ public class FightFragment extends Fragment {
                 // https://stackoverflow.com/questions/5291726/what-is-the-main-purpose-of-settag-gettag-methods-of-view //
                 Lutemon lutemon = (Lutemon) checkBox.getTag();
                 if (!lutemons_to_fight.contains(lutemon)) {
-                    Log.d("Toimii lisäys", "Niin kuin pitää");
                     lutemons_to_fight.add(lutemon);
                 }
             }
         }
-        // print lutemons to check it works //
-        for (Lutemon lutemon : lutemons_to_fight) {
-            Log.d("Lutemon", "Nimi: " + lutemon.getName() + ", väri: " + lutemon.getColor());
-        }
 
         if (lutemons_to_fight.size() == 2) {
-            Log.d("On kaksi Lutemonia", "kyllä");
             for (Lutemon lutemon : lutemons_to_fight) {
                 lutemon.setId(5);
             }
@@ -142,12 +136,6 @@ public class FightFragment extends Fragment {
             Intent intent = new Intent(getActivity(), FightActivity.class);
             startActivity(intent);
         }
-        /*
-        else {
-            TextView textView = view.findViewById(R.id.textViewFightlol);
-            textView.setText("Valitse kaksi Lutemonia niin pääset Elämäsi taisteluun!!!");
-        }
-        */
 
 
     }

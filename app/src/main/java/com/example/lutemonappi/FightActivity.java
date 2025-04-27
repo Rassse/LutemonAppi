@@ -26,6 +26,10 @@ public class FightActivity extends AppCompatActivity {
                 lutemonsInFight.add(lutemon);
             }
         }
+        if (lutemonsInFight.size() < 2) {
+            textView = findViewById(R.id.textViewFight);
+            textView.setText("Valitse kaksi Lutemonia taistelemaan!");
+        }
 
         if (lutemonsInFight.size() == 2) {
             textView = findViewById(R.id.textViewFight);
@@ -66,7 +70,7 @@ public class FightActivity extends AppCompatActivity {
                             textView.append("Lutemoni: " + lutemon1.getColor() + "(" + lutemon1.getName() + ")" + " hyök: " + lutemon1.getAttack() + "; puol: " + lutemon1.getDefense() + "; kok: " + lutemon1.getExperience() + "; elämät: " + lutemon1.getHealth()+"/"+lutemon1.getMaxHealth() + "\n");
                             textView.append("Lutemoni: " + lutemon2.getColor() + "(" + lutemon2.getName() + ")" + " hyök: " + lutemon2.getAttack() + "; puol: " + lutemon2.getDefense() + "; kok: " + lutemon2.getExperience() + "; elämät: " + lutemon2.getHealth()+"/"+lutemon2.getMaxHealth() + "\n");
                         });
-
+                        if (lutemon1.getHealth() <= 0) break;
                         if (lutemon2.getHealth() <= 0) break;
 
                         String defence1 = lutemon2.defence(lutemon1);
@@ -77,6 +81,8 @@ public class FightActivity extends AppCompatActivity {
                         });
 
                         try {
+                            // I learnt about thread.sleep() here //
+                            // https://www.digitalocean.com/community/tutorials/thread-sleep-java //
                             Thread.sleep(2000);
                         } catch (InterruptedException e) {
                             throw new RuntimeException(e);
@@ -91,6 +97,7 @@ public class FightActivity extends AppCompatActivity {
 
 
                         if (lutemon1.getHealth() <= 0) break;
+                        if (lutemon2.getHealth()<= 0) break;
 
                         String defence2 = lutemon1.defence(lutemon2);
                         runOnUiThread(() -> {
@@ -109,9 +116,13 @@ public class FightActivity extends AppCompatActivity {
                         if (lutemon1.getHealth() <= 0) {
                             lutemon1.setId(4);
                             lutemon2.setId(1);
+                            lutemon1.setExperience(lutemon1.getExperience()+1);
+                            lutemon2.setExperience(lutemon2.getExperience()+1);
                         } else if (lutemon2.getHealth() <= 0) {
                             lutemon2.setId(4);
                             lutemon1.setId(1);
+                            lutemon1.setExperience(lutemon1.getExperience()+1);
+                            lutemon2.setExperience(lutemon2.getExperience()+1);
                         }
                         storage.saveLutemons(FightActivity.this);
                     });
@@ -135,7 +146,6 @@ public class FightActivity extends AppCompatActivity {
             lutemonsInFight.clear();
 
             if (textView != null) {
-                // I was going to write textView.clearComposingText() but Copilot suggested setText("") //
                 textView.setText("");
             }
 
@@ -148,8 +158,4 @@ public class FightActivity extends AppCompatActivity {
             super.onResume();
         }
 
-        public void fightContinues(View view) {
-            Intent intent = new Intent(this, ActivityNavigator.class);
-            startActivity(intent);
-        }
     }

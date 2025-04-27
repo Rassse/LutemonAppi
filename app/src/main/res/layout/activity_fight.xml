@@ -6,44 +6,36 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".FightActivity">
-
-    <TextView
-        android:id="@+id/textViewFight"
-        android:layout_width="406dp"
-        android:layout_height="662dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="29dp"
-        android:layout_marginBottom="269dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.517"
+    <!-- I learnt here to create scrollview -->
+    <!-- https://www.youtube.com/watch?app=desktop&v=K4CGYiQu52s -->
+    <ScrollView
+        android:layout_width="412dp"
+        android:layout_height="532dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.149" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textViewFight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="29dp"
+            android:textSize="18sp" />
+    </ScrollView>
+
 
     <Button
         android:id="@+id/buttonFightToNavigator"
         android:layout_width="171dp"
         android:layout_height="65dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="161dp"
+        android:layout_marginStart="120dp"
+        android:layout_marginEnd="120dp"
         android:layout_marginBottom="4dp"
         android:onClick="switchToNavigator"
         android:text="Takaisin navigaattoriin"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.118"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
-        android:id="@+id/buttonContinue"
-        android:layout_width="170dp"
-        android:layout_height="60dp"
-        android:layout_marginEnd="23dp"
-        android:layout_marginBottom="7dp"
-        android:onClick="fightContinues"
-        android:text="Jatka"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
